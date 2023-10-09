@@ -11,8 +11,8 @@ java {
 dependencies {
   implementation(project(":domain"))
 
-  implementation("com.google.code.gson:gson:2.9.0")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+  implementation(Deps.gson)
+  implementation(Deps.coroutinesAndroid)
 
-  implementation("androidx.annotation:annotation:1.7.0")
+  implementation(Deps.annotation)
 }
