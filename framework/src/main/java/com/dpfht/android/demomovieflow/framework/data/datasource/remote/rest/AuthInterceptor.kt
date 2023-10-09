@@ -15,7 +15,7 @@ class AuthInterceptor: Interceptor {
 
     val requestBuilder = original.newBuilder()
       .url(url)
-      .header("Authorization", "Bearer ${Constants.VALUE_ACCESS_TOKEN}")
+      .header("Authorization", "Bearer ${Constants.ACCESS_TOKEN}")
       .method(original.method, original.body)
 
     val request = requestBuilder.build()
