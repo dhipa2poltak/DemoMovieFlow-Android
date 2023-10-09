@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/popularMoviesFragment">
+
+  <fragment
+      android:id="@+id/popularMoviesFragment"
+      android:name="com.dpfht.android.demomovieflow.feature_popular_movies.PopularMoviesFragment" />
+
+  <fragment
+      android:id="@+id/searchMovieFragment"
+      android:name="com.dpfht.android.demomovieflow.feature_search_movie.SearchMovieFragment" />
+
+  <fragment
+      android:id="@+id/favoriteMoviesFragment"
+      android:name="com.dpfht.android.demomovieflow.feature_favorite_movies.FavoriteMoviesFragment" />
+
+  <fragment
+      android:id="@+id/movieDetailsFragment"
+      android:name="com.dpfht.android.demomovieflow.feature_movie_details.MovieDetailsFragment">
+
+    <deepLink
+        app:uri="android-app://com.dpfht.android.demomovieflow/movie_details_fragment?movieId={movieId}" />
+
+    <argument
+        android:name="movieId"
+        android:defaultValue="-1"
+        app:argType="integer" />
+  </fragment>
+
+  <dialog
+      android:id="@+id/errorMessageDialogFragment"
+      android:name="com.dpfht.android.demomovieflow.feature_error_message.ErrorMessageDialogFragment" />
+</navigation>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="framework_text_error_connection">error in connection</string>
+  <string name="framework_text_error_conversion">error in conversion</string>
+  <string name="framework_text_fail_get_all_favorite_movies">failed to get all favorite movies</string>
+  <string name="framework_text_fail_get_favorite_movie">failed to get favorite movie</string>
+  <string name="framework_text_fail_add_favorite_movie">failed to add favorite movie</string>
+  <string name="framework_text_fail_delete_favorite_movie">failed to delete favorite movie</string>
+</resources>

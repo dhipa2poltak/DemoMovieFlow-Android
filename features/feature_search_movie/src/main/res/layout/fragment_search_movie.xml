@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    tools:context=".SearchMovieFragment">
+
+  <TextView
+      android:id="@+id/tv_title"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/search_movie_text_search_movie"
+      android:textStyle="bold"
+      android:textSize="24sp"
+      android:gravity="center"
+      android:layout_marginTop="10dp"
+      android:layout_marginHorizontal="10dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/vw_separator1"/>
+
+  <View
+      android:id="@+id/vw_separator1"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginTop="10dp"
+      android:background="#FFCCCCCC"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tv_title"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/ll_search"/>
+
+  <LinearLayout
+      android:id="@+id/ll_search"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="10dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/vw_separator1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/vw_separator2">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="@string/search_movie_text_hint_title"
+        android:textColor="#FF000000"
+        android:background="@android:drawable/editbox_background_normal"
+        android:padding="10dp"
+        android:lines="1"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:layout_marginStart="10dp"/>
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_movie_text_search"
+        android:layout_marginHorizontal="10dp"/>
+  </LinearLayout>
+
+  <View
+      android:id="@+id/vw_separator2"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginTop="10dp"
+      android:background="#FFCCCCCC"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/ll_search"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/rv_movies"/>
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_movies"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginHorizontal="10dp"
+      android:layout_marginBottom="10dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/vw_separator2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

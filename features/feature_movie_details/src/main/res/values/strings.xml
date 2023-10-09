@@ -1,0 +1,4 @@
+<resources>
+  <string name="movie_details_text_add_favorite">Add to Favorite</string>
+  <string name="movie_details_text_delete_favorite">Delete from Favorite</string>
+</resources>
