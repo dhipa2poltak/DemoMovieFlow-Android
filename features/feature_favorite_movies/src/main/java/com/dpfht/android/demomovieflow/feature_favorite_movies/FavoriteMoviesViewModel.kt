@@ -29,6 +29,9 @@ class FavoriteMoviesViewModel @Inject constructor(
   private val _modalMessage = MutableLiveData<String>()
   val modalMessage: LiveData<String> = _modalMessage
 
+  private val _isNoData = MutableLiveData<Boolean>()
+  val isNoData: LiveData<Boolean> = _isNoData
+
   init {
     adapter.cacheModels = cacheModels
     adapter.scope = viewModelScope
@@ -57,11 +60,13 @@ class FavoriteMoviesViewModel @Inject constructor(
     adapter.notifyDataSetChanged()
     cacheModels.addAll(list.map { FavoriteMovieCacheModel(it, null) })
     adapter.notifyDataSetChanged()
+    _isNoData.postValue(cacheModels.isEmpty())
   }
 
   private fun onErrorGetAllFavoriteMovies(message: String) {
     _isShowDialogLoading.postValue(false)
     _modalMessage.value = message
     _modalMessage.postValue("")
+    _isNoData.postValue(cacheModels.isEmpty())
   }
 }

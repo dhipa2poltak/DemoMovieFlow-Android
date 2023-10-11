@@ -1,5 +1,6 @@
 package com.dpfht.android.demomovieflow.feature_search_movie.paging
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.domain.entity.Result
@@ -11,6 +12,7 @@ class SearchMovieDataSource @Inject constructor(
 ) : PagingSource<Int, MovieEntity>() {
 
   lateinit var query: String
+  lateinit var rawNoData: MutableLiveData<Boolean>
 
   override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
     try {
@@ -27,6 +29,8 @@ class SearchMovieDataSource @Inject constructor(
           }
         }
       }
+
+      rawNoData.postValue(currentLoadingPageKey == 1 && arrList.isEmpty())
 
       val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
 

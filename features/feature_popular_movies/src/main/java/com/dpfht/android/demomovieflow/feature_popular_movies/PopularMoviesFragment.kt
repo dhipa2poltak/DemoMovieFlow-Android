@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.feature_popular_movies.databinding.FragmentPopularMoviesBinding
@@ -52,7 +53,34 @@ class PopularMoviesFragment : Fragment() {
     binding.rvMovies.adapter = viewModel.adapter
     viewModel.adapter.onClickMovieCallback = this::navigateToMovieDetails
 
+    observeViewModel()
+    setListener()
     viewModel.start()
+  }
+
+  private fun observeViewModel() {
+    viewModel.isNoData.observe(viewLifecycleOwner) { isNoData ->
+      if (isNoData) {
+        binding.rvMovies.visibility = View.INVISIBLE
+        binding.tvNoData.visibility = View.VISIBLE
+      } else {
+        binding.rvMovies.visibility = View.VISIBLE
+        binding.tvNoData.visibility = View.GONE
+      }
+    }
+  }
+
+  private fun setListener() {
+    viewModel.adapter.addLoadStateListener {
+      binding.clProgressBar.visibility = when (it.refresh) {
+        LoadState.Loading -> {
+          View.VISIBLE
+        }
+        else -> {
+          View.GONE
+        }
+      }
+    }
   }
 
   private fun navigateToMovieDetails(movieEntity: MovieEntity) {

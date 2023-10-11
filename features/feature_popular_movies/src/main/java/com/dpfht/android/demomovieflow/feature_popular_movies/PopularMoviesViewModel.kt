@@ -1,5 +1,7 @@
 package com.dpfht.android.demomovieflow.feature_popular_movies
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -17,11 +19,15 @@ class PopularMoviesViewModel @Inject constructor(
   val adapter: MovieAdapter
 ): ViewModel() {
 
+  private val _isNoData = MutableLiveData<Boolean>()
+  val isNoData: LiveData<Boolean> = _isNoData
+
   fun start() {
     if (adapter.itemCount > 0) {
       return
     }
 
+    popularMoviesDataSource.rawNoData = _isNoData
     val pager = Pager(PagingConfig(pageSize = 20)) {
       popularMoviesDataSource
     }.flow.cachedIn(viewModelScope)

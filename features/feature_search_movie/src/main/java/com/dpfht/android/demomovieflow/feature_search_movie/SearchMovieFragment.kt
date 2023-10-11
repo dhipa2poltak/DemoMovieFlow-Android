@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.feature_search_movie.databinding.FragmentSearchMovieBinding
@@ -59,6 +60,26 @@ class SearchMovieFragment : Fragment() {
       if (it) {
         binding.rvMovies.adapter = viewModel.adapter
         viewModel.adapter.onClickMovieCallback = this@SearchMovieFragment::navigateToMovieDetails
+        viewModel.adapter.addLoadStateListener { loadState ->
+          binding.clProgressBar.visibility = when (loadState.refresh) {
+            LoadState.Loading -> {
+              View.VISIBLE
+            }
+            else -> {
+              View.GONE
+            }
+          }
+        }
+      }
+    }
+
+    viewModel.isNoData.observe(viewLifecycleOwner) { isNoData ->
+      if (isNoData) {
+        binding.rvMovies.visibility = View.INVISIBLE
+        binding.tvNoData.visibility = View.VISIBLE
+      } else {
+        binding.rvMovies.visibility = View.VISIBLE
+        binding.tvNoData.visibility = View.GONE
       }
     }
   }

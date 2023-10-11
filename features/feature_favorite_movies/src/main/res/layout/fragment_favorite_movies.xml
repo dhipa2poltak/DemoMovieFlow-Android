@@ -44,6 +44,19 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"/>
 
+  <TextView
+      android:id="@+id/tv_no_data"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/search_movie_text_no_data"
+      android:textStyle="italic"
+      app:layout_constraintStart_toStartOf="@+id/rv_movies"
+      app:layout_constraintTop_toTopOf="@+id/rv_movies"
+      app:layout_constraintEnd_toEndOf="@+id/rv_movies"
+      app:layout_constraintBottom_toBottomOf="@+id/rv_movies"
+      android:visibility="gone"
+      tools:visibility="visible"/>
+
   <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/cl_progress_bar"
       android:layout_width="0dp"

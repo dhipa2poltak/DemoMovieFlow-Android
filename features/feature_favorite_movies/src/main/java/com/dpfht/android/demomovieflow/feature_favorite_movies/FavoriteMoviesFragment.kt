@@ -74,6 +74,16 @@ class FavoriteMoviesFragment : Fragment() {
         Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
       }
     }
+
+    viewModel.isNoData.observe(viewLifecycleOwner) { isNoData ->
+      if (isNoData) {
+        binding.rvMovies.visibility = View.INVISIBLE
+        binding.tvNoData.visibility = View.VISIBLE
+      } else {
+        binding.rvMovies.visibility = View.VISIBLE
+        binding.tvNoData.visibility = View.GONE
+      }
+    }
   }
 
   private fun onNavigateToMovieDetails(movieEntity: MovieEntity) {
