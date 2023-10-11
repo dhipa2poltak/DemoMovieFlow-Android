@@ -1,6 +1,5 @@
 package com.dpfht.android.demomovieflow.framework.di.module
 
-import com.dpfht.android.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 import com.dpfht.android.demomovieflow.domain.repository.AppRepository
 import com.dpfht.android.demomovieflow.domain.usecase.AddFavoriteMovieUseCase
 import com.dpfht.android.demomovieflow.domain.usecase.AddFavoriteMovieUseCaseImpl

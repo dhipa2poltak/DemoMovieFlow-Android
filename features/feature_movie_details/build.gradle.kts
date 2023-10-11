@@ -53,4 +53,5 @@ dependencies {
   implementation(Deps.lifecycleViewModel)
 
   implementation(Deps.picasso)
+  implementation(Deps.gson)
 }

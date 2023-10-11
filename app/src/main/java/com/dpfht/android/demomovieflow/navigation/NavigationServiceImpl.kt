@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.android.demomovieflow.R
+import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.android.demomovieflow.framework.commons.model.MovieArgModel
 import com.dpfht.android.demomovieflow.framework.navigation.NavigationService
+import com.google.gson.Gson
 
 class NavigationServiceImpl(
   private val navController: NavController,
@@ -17,12 +20,25 @@ class NavigationServiceImpl(
     navController.graph = navGraph
   }
 
-  override fun navigateToMovieDetails(movieId: Int) {
+  override fun navigateToMovieDetails(movieId: Int, movieEntity: MovieEntity?) {
+    var strModel = ""
+    if (movieEntity != null) {
+      val movieArgModel = MovieArgModel(
+        id = movieEntity.id,
+        title = movieEntity.title,
+        overview = movieEntity.overview,
+        imageUrl = movieEntity.imageUrl
+      )
+
+      strModel = Gson().toJson(movieArgModel)
+    }
+
     val builder = Uri.Builder()
     builder.scheme("android-app")
       .authority("com.dpfht.android.demomovieflow")
       .appendPath("movie_details_fragment")
       .appendQueryParameter("movieId", "$movieId")
+      .appendQueryParameter("movieModel", strModel)
 
     navController.navigate(NavDeepLinkRequest.Builder
       .fromUri(builder.build())

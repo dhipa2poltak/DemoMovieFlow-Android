@@ -39,33 +39,40 @@ class MovieDetailsViewModel @Inject constructor(
   private val _isFavoriteData = MutableLiveData<Boolean>()
   val isFavoriteData: LiveData<Boolean> = _isFavoriteData
 
-  private lateinit var movieEntity: MovieEntity
-
   var movieId = -1
+  var movieEntity: MovieEntity? = null
 
   fun start() {
     if (movieId == -1) {
       return
     }
 
-    _isShowDialogLoading.postValue(true)
-    viewModelScope.launch {
-      getMovieDetailsUseCase(movieId).collect { result ->
-        when (result) {
-          is Result.Success -> {
-            onSuccessGetMovieDetails(result.value)
-            checkIsFavorite(result.value)
-          }
-          is Result.ErrorResult -> {
-            onErrorGetMovieDetails(result.message)
+    if (movieEntity == null) {
+      _isShowDialogLoading.postValue(true)
+      viewModelScope.launch {
+        getMovieDetailsUseCase(movieId).collect { result ->
+          when (result) {
+            is Result.Success -> {
+              movieEntity = result.value
+              onSuccessGetMovieDetails(result.value)
+              checkIsFavorite(result.value)
+            }
+
+            is Result.ErrorResult -> {
+              onErrorGetMovieDetails(result.message)
+            }
           }
         }
+      }
+    } else {
+      movieEntity?.let {
+        onSuccessGetMovieDetails(it)
+        checkIsFavorite(it)
       }
     }
   }
 
   private fun onSuccessGetMovieDetails(movieEntity: MovieEntity) {
-    this.movieEntity = movieEntity
     _movieData.postValue(movieEntity)
   }
 
@@ -105,13 +112,15 @@ class MovieDetailsViewModel @Inject constructor(
     _isShowDialogLoading.postValue(true)
 
     viewModelScope.launch {
-      addFavoriteMovieUseCase(this@MovieDetailsViewModel.movieEntity).collect { result ->
-        when (result) {
-          is Result.Success -> {
-            onSuccessAddFavoriteMovie(result.value)
-          }
-          is Result.ErrorResult -> {
-            onErrorAddFavoriteMovie(result.message)
+      movieEntity?.let {
+        addFavoriteMovieUseCase(it).collect { result ->
+          when (result) {
+            is Result.Success -> {
+              onSuccessAddFavoriteMovie(result.value)
+            }
+            is Result.ErrorResult -> {
+              onErrorAddFavoriteMovie(result.message)
+            }
           }
         }
       }
@@ -133,13 +142,15 @@ class MovieDetailsViewModel @Inject constructor(
     _isShowDialogLoading.postValue(true)
 
     viewModelScope.launch {
-      deleteFavoriteMovieUseCase(this@MovieDetailsViewModel.movieEntity).collect { voidResult ->
-        when (voidResult) {
-          VoidResult.Success -> {
-            onSuccessDeleteFavoriteMovie()
-          }
-          is VoidResult.Error -> {
-            onErrorDeleteFavoriteMovie(voidResult.message)
+      movieEntity?.let {
+        deleteFavoriteMovieUseCase(it).collect { voidResult ->
+          when (voidResult) {
+            VoidResult.Success -> {
+              onSuccessDeleteFavoriteMovie()
+            }
+            is VoidResult.Error -> {
+              onErrorDeleteFavoriteMovie(voidResult.message)
+            }
           }
         }
       }

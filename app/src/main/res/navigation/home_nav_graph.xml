@@ -21,12 +21,17 @@
       android:name="com.dpfht.android.demomovieflow.feature_movie_details.MovieDetailsFragment">
 
     <deepLink
-        app:uri="android-app://com.dpfht.android.demomovieflow/movie_details_fragment?movieId={movieId}" />
+        app:uri="android-app://com.dpfht.android.demomovieflow/movie_details_fragment?movieId={movieId}&amp;movieModel={movieModel}" />
 
     <argument
         android:name="movieId"
         android:defaultValue="-1"
         app:argType="integer" />
+    <argument
+        android:name="movieModel"
+        android:defaultValue=""
+        app:argType="string"
+      />
   </fragment>
 
   <dialog

@@ -77,6 +77,6 @@ class FavoriteMoviesFragment : Fragment() {
   }
 
   private fun onNavigateToMovieDetails(movieEntity: MovieEntity) {
-    navigationService.navigateToMovieDetails(movieEntity.id)
+    navigationService.navigateToMovieDetails(movieEntity.id, movieEntity)
   }
 }

@@ -115,4 +115,6 @@ dependencies {
 
   implementation(Deps.hilt)
   kapt(Deps.hiltCompiler)
+
+  implementation(Deps.gson)
 }
