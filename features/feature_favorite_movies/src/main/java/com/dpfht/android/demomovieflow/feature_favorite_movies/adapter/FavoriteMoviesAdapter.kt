@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.domain.entity.Result
-import com.dpfht.android.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 import com.dpfht.android.demomovieflow.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter.ViewHolder
+import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieCacheModel
 import com.dpfht.android.demomovieflow.framework.databinding.RowMovieBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +18,7 @@ class FavoriteMoviesAdapter @Inject constructor(
   private val getMovieDetailsUseCase: GetMovieDetailsUseCase
 ): RecyclerView.Adapter<ViewHolder>() {
 
-  lateinit var favoriteEntities: ArrayList<FavoriteMovieDBEntity>
+  lateinit var cacheModels: ArrayList<FavoriteMovieCacheModel>
   lateinit var scope: CoroutineScope
 
   var onClickMovieCallback: ((MovieEntity) -> Unit)? = null
@@ -30,44 +30,52 @@ class FavoriteMoviesAdapter @Inject constructor(
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    val favEntity = favoriteEntities[position]
+    val cacheModel = cacheModels[position]
 
-    scope.launch {
-      getMovieDetailsUseCase(favEntity.movieId).collect { result ->
-        when (result) {
-          is Result.Success -> {
-            onSuccessGetMovieDetails(holder.binding, result.value)
-          }
-          is Result.ErrorResult -> {
-            onErrorGetMovieDetails(result.message)
+    if (cacheModel.movieEntity == null) {
+      scope.launch {
+        getMovieDetailsUseCase(cacheModel.favEntity.movieId).collect { result ->
+          when (result) {
+            is Result.Success -> {
+              cacheModel.movieEntity = result.value
+              onSuccessGetMovieDetails(holder.binding, cacheModel.movieEntity)
+            }
+
+            is Result.ErrorResult -> {
+              onErrorGetMovieDetails(result.message)
+            }
           }
         }
       }
+    } else {
+      onSuccessGetMovieDetails(holder.binding, cacheModel.movieEntity)
     }
   }
 
-  private fun onSuccessGetMovieDetails(binding: RowMovieBinding, movieEntity: MovieEntity) {
-    binding.tvTitleMovie.text = ""
-    binding.tvOverviewMovie.text = ""
-    binding.ivMovie.setImageURI(null)
-    binding.root.setOnClickListener(null)
+  private fun onSuccessGetMovieDetails(binding: RowMovieBinding, movieEntity: MovieEntity?) {
+    movieEntity?.let {
+      binding.tvTitleMovie.text = ""
+      binding.tvOverviewMovie.text = ""
+      binding.ivMovie.setImageURI(null)
+      binding.root.setOnClickListener(null)
 
-    binding.tvTitleMovie.text = movieEntity.title
-    binding.tvOverviewMovie.text = movieEntity.overview
+      binding.tvTitleMovie.text = movieEntity.title
+      binding.tvOverviewMovie.text = movieEntity.overview
 
-    if (movieEntity.imageUrl.isNotEmpty()) {
-      Picasso.get().load(movieEntity.imageUrl).into(binding.ivMovie)
-    }
+      if (movieEntity.imageUrl.isNotEmpty()) {
+        Picasso.get().load(movieEntity.imageUrl).into(binding.ivMovie)
+      }
 
-    binding.root.setOnClickListener {
-      onClickMovieCallback?.let { it(movieEntity) }
+      binding.root.setOnClickListener {
+        onClickMovieCallback?.let { it(movieEntity) }
+      }
     }
   }
 
   private fun onErrorGetMovieDetails(message: String) {}
 
   override fun getItemCount(): Int {
-    return favoriteEntities.size
+    return cacheModels.size
   }
 
   class ViewHolder(val binding: RowMovieBinding): RecyclerView.ViewHolder(binding.root)

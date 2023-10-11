@@ -8,13 +8,14 @@ import com.dpfht.android.demomovieflow.domain.entity.Result
 import com.dpfht.android.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 import com.dpfht.android.demomovieflow.domain.usecase.GetAllFavoriteMoviesUseCase
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter
+import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieCacheModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteMoviesViewModel @Inject constructor(
-  private val favoriteEntities: ArrayList<FavoriteMovieDBEntity>,
+  private val cacheModels: ArrayList<FavoriteMovieCacheModel>,
   private val getAllFavoriteMoviesUseCase: GetAllFavoriteMoviesUseCase,
   val adapter: FavoriteMoviesAdapter
 ): ViewModel() {
@@ -29,7 +30,7 @@ class FavoriteMoviesViewModel @Inject constructor(
   val modalMessage: LiveData<String> = _modalMessage
 
   init {
-    adapter.favoriteEntities = favoriteEntities
+    adapter.cacheModels = cacheModels
     adapter.scope = viewModelScope
   }
 
@@ -52,9 +53,9 @@ class FavoriteMoviesViewModel @Inject constructor(
 
   private fun onSuccessGetAllFavoriteMovies(list: List<FavoriteMovieDBEntity>) {
     _isShowDialogLoading.postValue(false)
-    favoriteEntities.clear()
+    cacheModels.clear()
     adapter.notifyDataSetChanged()
-    favoriteEntities.addAll(list)
+    cacheModels.addAll(list.map { FavoriteMovieCacheModel(it, null) })
     adapter.notifyDataSetChanged()
   }
 
