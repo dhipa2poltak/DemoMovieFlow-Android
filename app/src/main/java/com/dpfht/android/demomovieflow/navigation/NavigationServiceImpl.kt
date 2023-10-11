@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.android.demomovieflow.R
+import com.dpfht.android.demomovieflow.data.model.Genre
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.framework.commons.model.MovieArgModel
 import com.dpfht.android.demomovieflow.framework.navigation.NavigationService
@@ -27,7 +28,8 @@ class NavigationServiceImpl(
         id = movieEntity.id,
         title = movieEntity.title,
         overview = movieEntity.overview,
-        imageUrl = movieEntity.imageUrl
+        imageUrl = movieEntity.imageUrl,
+        genres = movieEntity.genres.map { Genre(it.id, it.name) }
       )
 
       strModel = Gson().toJson(movieArgModel)

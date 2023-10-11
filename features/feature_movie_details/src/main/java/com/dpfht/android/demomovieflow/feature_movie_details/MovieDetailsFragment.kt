@@ -97,6 +97,23 @@ class MovieDetailsFragment : Fragment() {
       if (movieEntity.imageUrl.isNotEmpty()) {
         Picasso.get().load(movieEntity.imageUrl).into(binding.ivImageMovie)
       }
+
+      var strGenres = ""
+      for (genre in movieEntity.genres) {
+        if (strGenres.isEmpty()) {
+          strGenres = genre.name
+        } else {
+          strGenres += ", ${genre.name}"
+        }
+      }
+
+      if (strGenres.isNotEmpty()) {
+        binding.tvGenresMovie.text = strGenres
+        binding.tvGenresMovie.visibility = View.VISIBLE
+      } else {
+        binding.tvGenresMovie.text = strGenres
+        binding.tvGenresMovie.visibility = View.INVISIBLE
+      }
     }
 
     viewModel.isFavoriteData.observe(viewLifecycleOwner) { isFavorite ->

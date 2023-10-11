@@ -2,6 +2,7 @@ package com.dpfht.android.demomovieflow.data.model
 
 import androidx.annotation.Keep
 import com.dpfht.android.demomovieflow.data.Constants
+import com.dpfht.android.demomovieflow.domain.entity.GenreEntity
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -82,6 +83,7 @@ fun MovieDetailsResponse.toDomain(): MovieEntity {
         id ?: -1,
         title ?: "",
         overview ?: "",
-        if (posterPath?.isNotEmpty() == true) Constants.IMAGE_URL_BASE_PATH + posterPath else ""
+        if (posterPath?.isNotEmpty() == true) Constants.IMAGE_URL_BASE_PATH + posterPath else "",
+        this.genres?.map { GenreEntity(it.id ?: -1, it.name ?: "") } ?: listOf()
     )
 }
