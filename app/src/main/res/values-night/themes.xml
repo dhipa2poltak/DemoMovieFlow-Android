@@ -5,8 +5,10 @@
     <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     <item name="colorPrimary">@color/black</item>
     <item name="colorControlNormal">@android:color/white</item>
-    <item name="android:textColorPrimary">@android:color/white</item>
+    <item name="android:textColorPrimary">@android:color/black</item>
   </style>
 
-  <style name="Theme.MyToolbar" parent="Theme.MaterialComponents.DayNight.DarkActionBar"/>
+  <style name="Theme.MyToolbar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <item name="titleTextColor">@color/white</item>
+  </style>
 </resources>

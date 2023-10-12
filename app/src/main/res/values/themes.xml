@@ -5,10 +5,17 @@
     <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     <item name="colorPrimary">@color/black</item>
     <item name="colorControlNormal">@android:color/white</item>
-    <item name="android:textColorPrimary">@android:color/white</item>
+    <item name="android:textColorPrimary">@android:color/black</item>
   </style>
 
   <style name="Theme.DemoMovieFlow" parent="Base.Theme.DemoMovieFlow" />
 
-  <style name="Theme.MyToolbar" parent="Theme.MaterialComponents.DayNight.DarkActionBar"/>
+  <style name="Theme.MyToolbar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <item name="titleTextColor">@color/white</item>
+  </style>
+
+  <style name="MyAlertDialog" parent="Theme.MaterialComponents.DayNight.Dialog"> <!-- Theme.AppCompat.Light.Dialog-->
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:layout_gravity">center</item>
+  </style>
 </resources>

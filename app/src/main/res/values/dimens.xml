@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="about_logo_size">120dp</dimen>
+  <dimen name="about_dialog_fragment_width">350dp</dimen>
+  <dimen name="about_dialog_fragment_height">400dp</dimen>
+</resources>

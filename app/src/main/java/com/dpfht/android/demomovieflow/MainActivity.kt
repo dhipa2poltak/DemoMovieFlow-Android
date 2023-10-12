@@ -1,8 +1,11 @@
 package com.dpfht.android.demomovieflow
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.MenuCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,6 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dpfht.android.demomovieflow.databinding.ActivityMainBinding
+import com.dpfht.android.demomovieflow.view.about.AboutDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,5 +50,29 @@ class MainActivity : AppCompatActivity() {
     } else {
       super.onBackPressed()
     }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menu?.let {
+      MenuCompat.setGroupDividerEnabled(menu, true)
+      menuInflater.inflate(R.menu.main_menu, menu)
+    }
+
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.itm_about -> {
+        showAboutDialog()
+        return true
+      }
+    }
+    return super.onOptionsItemSelected(item)
+  }
+
+  private fun showAboutDialog() {
+    val dialog = AboutDialogFragment.newInstance()
+    dialog.show(supportFragmentManager, "fragment_about")
   }
 }
