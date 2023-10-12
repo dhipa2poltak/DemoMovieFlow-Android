@@ -41,6 +41,11 @@ class MainActivity : AppCompatActivity() {
   }
 
   override fun onSupportNavigateUp(): Boolean {
+    if (navController.currentDestination?.id == R.id.movieDetailsFragment) {
+      onBackPressed()
+      return true
+    }
+
     return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
   }
 

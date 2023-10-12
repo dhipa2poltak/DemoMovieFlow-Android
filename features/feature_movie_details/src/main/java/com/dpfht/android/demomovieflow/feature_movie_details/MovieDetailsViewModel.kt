@@ -41,6 +41,7 @@ class MovieDetailsViewModel @Inject constructor(
 
   var movieId = -1
   var movieEntity: MovieEntity? = null
+  var isForResult = false
 
   fun start() {
     if (movieId == -1) {
@@ -109,6 +110,11 @@ class MovieDetailsViewModel @Inject constructor(
   }
 
   fun addFavoriteMovie() {
+    if (isForResult) {
+      _isFavoriteData.postValue(true)
+      return
+    }
+
     _isShowDialogLoading.postValue(true)
 
     viewModelScope.launch {
@@ -139,6 +145,11 @@ class MovieDetailsViewModel @Inject constructor(
   }
 
   fun deleteFavoriteMovie() {
+    if (isForResult) {
+      _isFavoriteData.postValue(false)
+      return
+    }
+
     _isShowDialogLoading.postValue(true)
 
     viewModelScope.launch {

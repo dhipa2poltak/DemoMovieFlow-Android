@@ -21,7 +21,7 @@ class NavigationServiceImpl(
     navController.graph = navGraph
   }
 
-  override fun navigateToMovieDetails(movieId: Int, movieEntity: MovieEntity?) {
+  override fun navigateToMovieDetails(movieId: Int, movieEntity: MovieEntity?, isForResult: Boolean) {
     var strModel = ""
     if (movieEntity != null) {
       val movieArgModel = MovieArgModel(
@@ -41,6 +41,7 @@ class NavigationServiceImpl(
       .appendPath("movie_details_fragment")
       .appendQueryParameter("movieId", "$movieId")
       .appendQueryParameter("movieModel", strModel)
+      .appendQueryParameter("isForResult", "$isForResult")
 
     navController.navigate(NavDeepLinkRequest.Builder
       .fromUri(builder.build())
@@ -58,5 +59,9 @@ class NavigationServiceImpl(
       NavDeepLinkRequest.Builder
         .fromUri(builder.build())
         .build())
+  }
+
+  override fun navigateUp() {
+    navController.navigateUp()
   }
 }

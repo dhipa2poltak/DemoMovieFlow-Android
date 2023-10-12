@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
@@ -38,6 +39,19 @@ class FavoriteMoviesFragment : Fragment() {
       .inject(this)
   }
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    setFragmentResultListener("is_favorite_action") { _, result ->
+      val movieId = result.getInt("movie_id")
+      val isFavorite = result.getBoolean("is_favorite")
+
+      viewModel.isFromDetails = true
+      viewModel.isRemovingMovie = !isFavorite
+      viewModel.movieIdToRemove = movieId
+    }
+  }
+
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
@@ -55,6 +69,10 @@ class FavoriteMoviesFragment : Fragment() {
     viewModel.adapter.onClickMovieCallback = this::onNavigateToMovieDetails
 
     observeViewModel()
+  }
+
+  override fun onResume() {
+    super.onResume()
     viewModel.start()
   }
 
@@ -87,6 +105,6 @@ class FavoriteMoviesFragment : Fragment() {
   }
 
   private fun onNavigateToMovieDetails(movieEntity: MovieEntity) {
-    navigationService.navigateToMovieDetails(movieEntity.id, movieEntity)
+    navigationService.navigateToMovieDetails(movieEntity.id, movieEntity, true)
   }
 }

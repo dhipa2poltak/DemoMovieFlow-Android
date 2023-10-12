@@ -2,11 +2,13 @@ package com.dpfht.android.demomovieflow.feature_movie_details
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.dpfht.android.demomovieflow.feature_movie_details.databinding.FragmentMovieDetailsBinding
 import com.dpfht.android.demomovieflow.feature_movie_details.di.DaggerMovieDetailsComponent
@@ -21,6 +23,7 @@ import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
@@ -64,6 +67,8 @@ class MovieDetailsFragment : Fragment() {
           val movieModel = Gson().fromJson<MovieArgModel>(strModel, typeToken)
           viewModel.movieEntity = movieModel.toDomain()
         }
+
+        viewModel.isForResult = it.getBoolean("isForResult")
 
         observeViewModel()
         setListener()
@@ -135,5 +140,27 @@ class MovieDetailsFragment : Fragment() {
     binding.btnDeleteFavorite.setOnClickListener {
       viewModel.deleteFavoriteMovie()
     }
+
+    requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+  }
+
+  private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+    override fun handleOnBackPressed() {
+      if (viewModel.isForResult) {
+        val result = Bundle()
+        result.putInt("movie_id", viewModel.movieId)
+        result.putBoolean("is_favorite", viewModel.isFavoriteData.value ?: false)
+
+        setFragmentResult("is_favorite_action", result)
+      }
+
+      navigationService.navigateUp()
+    }
+  }
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    onBackPressedCallback.isEnabled = false
+    onBackPressedCallback.remove()
   }
 }
