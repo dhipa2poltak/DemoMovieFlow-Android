@@ -17,7 +17,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
@@ -39,7 +38,7 @@ class RemoteDataSourceImpl(
         emit(result)
       }
     }
-  }.flowOn(Dispatchers.IO)
+  }
 
   override suspend fun getMovieDetails(movieId: Int): Flow<Result<MovieEntity>> = flow {
     when (val result = safeApiCall(Dispatchers.IO) { restService.getMovieDetails(movieId) }) {
@@ -52,7 +51,7 @@ class RemoteDataSourceImpl(
         emit(result)
       }
     }
-  }.flowOn(Dispatchers.IO)
+  }
 
   override suspend fun searchMovie(query: String, page: Int): Flow<Result<MovieDomain>> = flow {
     when (val result = safeApiCall(Dispatchers.IO) { restService.searchMovie(query, page) }) {
@@ -65,7 +64,7 @@ class RemoteDataSourceImpl(
         emit(result)
       }
     }
-  }.flowOn(Dispatchers.IO)
+  }
 
   //--
 
