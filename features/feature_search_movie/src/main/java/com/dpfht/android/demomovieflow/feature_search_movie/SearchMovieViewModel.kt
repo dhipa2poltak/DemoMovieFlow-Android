@@ -24,6 +24,9 @@ class SearchMovieViewModel @Inject constructor(
   private val _isNoData = MutableLiveData<Boolean>()
   val isNoData: LiveData<Boolean> = _isNoData
 
+  private val _modalMessage = MutableLiveData<String>()
+  val modalMessage: LiveData<String> = _modalMessage
+
   lateinit var adapter: MovieAdapter
 
   fun onSearchMovie(query: String) {
@@ -32,6 +35,7 @@ class SearchMovieViewModel @Inject constructor(
 
     searchMovieDataSource.query = query
     searchMovieDataSource.rawNoData = _isNoData
+    searchMovieDataSource.rawErrorMessage = _modalMessage
     val pager = Pager(PagingConfig(pageSize = 20)) {
       searchMovieDataSource
     }.flow.cachedIn(viewModelScope)

@@ -13,6 +13,7 @@ class SearchMovieDataSource @Inject constructor(
 
   lateinit var query: String
   lateinit var rawNoData: MutableLiveData<Boolean>
+  lateinit var rawErrorMessage: MutableLiveData<String>
 
   override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
     try {
@@ -42,6 +43,8 @@ class SearchMovieDataSource @Inject constructor(
         nextKey = nextKey
       )
     } catch (e: Exception) {
+      rawErrorMessage.value = e.message
+      rawErrorMessage.postValue("")
       return LoadResult.Error(e)
     }
   }

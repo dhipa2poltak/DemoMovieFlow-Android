@@ -17,10 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteMoviesViewModel @Inject constructor(
-  private val cacheModels: ArrayList<FavoriteMovieCacheModel>,
   private val getAllFavoriteMoviesUseCase: GetAllFavoriteMoviesUseCase,
-  val adapter: FavoriteMoviesAdapter,
-  private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase
+  private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
+  private val cacheModels: ArrayList<FavoriteMovieCacheModel>,
+  val adapter: FavoriteMoviesAdapter
 ): ViewModel() {
 
   private val _isShowDialogLoading = MutableLiveData<Boolean>()

@@ -82,6 +82,12 @@ class SearchMovieFragment : Fragment() {
         binding.tvNoData.visibility = View.GONE
       }
     }
+
+    viewModel.modalMessage.observe(viewLifecycleOwner) { msg ->
+      if (msg.isNotEmpty()) {
+        navigationService.navigateToErrorMessage(msg)
+      }
+    }
   }
 
   private fun setListener() {
