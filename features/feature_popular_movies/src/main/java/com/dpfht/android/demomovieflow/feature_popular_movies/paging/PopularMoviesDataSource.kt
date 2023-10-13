@@ -12,6 +12,7 @@ class PopularMoviesDataSource @Inject constructor(
 ) : PagingSource<Int, MovieEntity>() {
 
   lateinit var rawNoData: MutableLiveData<Boolean>
+  lateinit var rawErrorMessage: MutableLiveData<String>
 
   override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
     try {
@@ -41,6 +42,8 @@ class PopularMoviesDataSource @Inject constructor(
         nextKey = nextKey
       )
     } catch (e: Exception) {
+      rawErrorMessage.value = e.message
+      rawErrorMessage.postValue("")
       return LoadResult.Error(e)
     }
   }

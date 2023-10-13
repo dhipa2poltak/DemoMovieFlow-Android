@@ -22,12 +22,16 @@ class PopularMoviesViewModel @Inject constructor(
   private val _isNoData = MutableLiveData<Boolean>()
   val isNoData: LiveData<Boolean> = _isNoData
 
+  private val _modalMessage = MutableLiveData<String>()
+  val modalMessage: LiveData<String> = _modalMessage
+
   fun start() {
     if (adapter.itemCount > 0) {
       return
     }
 
     popularMoviesDataSource.rawNoData = _isNoData
+    popularMoviesDataSource.rawErrorMessage = _modalMessage
     val pager = Pager(PagingConfig(pageSize = 20)) {
       popularMoviesDataSource
     }.flow.cachedIn(viewModelScope)
