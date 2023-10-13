@@ -5,29 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/ll_title"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="vertical"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="start|center_vertical"
-            android:padding="10dp"
-            android:text="@string/app_text_about"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:background="#FF000000"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
-
     <ScrollView
         android:id="@+id/scr"
         android:layout_width="match_parent"
@@ -35,8 +12,8 @@
         android:fillViewport="false"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:layout_above="@+id/ll_ok"
-        android:layout_below="@+id/ll_title"
         android:padding="10dp">
 
         <LinearLayout
