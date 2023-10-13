@@ -6,7 +6,6 @@ interface NavigationService {
 
   fun navigateToMovieHome()
   fun navigateToMovieDetails(movieId: Int, movieEntity: MovieEntity? = null, isForResult: Boolean = false)
-  fun navigatoErrorMessage(message: String)
-
+  fun navigateToErrorMessage(message: String)
   fun navigateUp()
 }

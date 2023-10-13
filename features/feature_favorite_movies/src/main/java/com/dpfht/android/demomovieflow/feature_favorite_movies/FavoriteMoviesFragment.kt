@@ -16,7 +16,6 @@ import com.dpfht.android.demomovieflow.feature_favorite_movies.di.DaggerFavorite
 import com.dpfht.android.demomovieflow.framework.Constants
 import com.dpfht.android.demomovieflow.framework.di.dependency.NavigationServiceDependency
 import com.dpfht.android.demomovieflow.framework.navigation.NavigationService
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
@@ -90,7 +89,7 @@ class FavoriteMoviesFragment : Fragment() {
 
     viewModel.modalMessage.observe(viewLifecycleOwner) { msg ->
       if (msg.isNotEmpty()) {
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
+        navigationService.navigateToErrorMessage(msg)
       }
     }
 

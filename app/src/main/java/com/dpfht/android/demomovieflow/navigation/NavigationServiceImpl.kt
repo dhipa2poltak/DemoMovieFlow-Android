@@ -47,7 +47,7 @@ class NavigationServiceImpl(
       .build())
   }
 
-  override fun navigatoErrorMessage(message: String) {
+  override fun navigateToErrorMessage(message: String) {
     val builder = Uri.Builder()
     builder.scheme("android-app")
       .authority("com.dpfht.android.demomovieflow")

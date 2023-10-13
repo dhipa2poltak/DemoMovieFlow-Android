@@ -17,7 +17,6 @@ import com.dpfht.android.demomovieflow.framework.commons.model.MovieArgModel
 import com.dpfht.android.demomovieflow.framework.commons.model.toDomain
 import com.dpfht.android.demomovieflow.framework.di.dependency.NavigationServiceDependency
 import com.dpfht.android.demomovieflow.framework.navigation.NavigationService
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
@@ -92,7 +91,7 @@ class MovieDetailsFragment : Fragment() {
 
     viewModel.modalMessage.observe(viewLifecycleOwner) { msg ->
       if (msg.isNotEmpty()) {
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
+        navigationService.navigateToErrorMessage(msg)
       }
     }
 
