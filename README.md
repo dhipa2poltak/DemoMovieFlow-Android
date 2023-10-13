@@ -1,5 +1,14 @@
 # DemoMovieFlow-Android
 
+**Screenshots:**
+| <img src="docs/screenshots/splash.jpg">          | <img src="docs/screenshots/popular_movies.jpg"> | <img src="docs/screenshots/search_movie.jpg"> |
+| ------------------------------------------------ | ----------------------------------------------- | --------------------------------------------- |
+| <img src="docs/screenshots/favorite_movies.jpg"> | <img src="docs/screenshots/movie_details.jpg">  | <img src="docs/screenshots/burger_menu.jpg">  |
+| ------------------------------------------------ | ----------------------------------------------- | --------------------------------------------- |
+
+**APK file:**
+**[Demo Movie Flow v1.1.apk](https://drive.google.com/file/d/1DOybEwMl9W9fBYxRZvxEVJ1xabnK8Blq/view?usp=sharing)**
+
 **Technology Stack:**
 - Kotlin Programming Language
 - Clean Architecture
@@ -16,6 +25,7 @@
 - GSON Serialization
 - Gradle build flavors
 - BuildSrc + Kotlin DSL
+- Proguard
 - Git
 
 **To run the project in DEBUG MODE:**
