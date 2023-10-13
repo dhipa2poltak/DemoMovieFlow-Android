@@ -25,7 +25,7 @@ class ActivityModule {
   }
 
   @Provides
-  fun provideNavigationService(navController: NavController, @ActivityContext context: Context): NavigationService {
-    return NavigationServiceImpl(navController, context as AppCompatActivity)
+  fun provideNavigationService(navController: NavController): NavigationService {
+    return NavigationServiceImpl(navController)
   }
 }

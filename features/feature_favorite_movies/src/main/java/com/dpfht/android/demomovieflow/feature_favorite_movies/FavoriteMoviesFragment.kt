@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.feature_favorite_movies.databinding.FragmentFavoriteMoviesBinding
 import com.dpfht.android.demomovieflow.feature_favorite_movies.di.DaggerFavoriteMoviesComponent
+import com.dpfht.android.demomovieflow.framework.Constants
 import com.dpfht.android.demomovieflow.framework.di.dependency.NavigationServiceDependency
 import com.dpfht.android.demomovieflow.framework.navigation.NavigationService
 import com.google.android.material.snackbar.Snackbar
@@ -42,9 +43,9 @@ class FavoriteMoviesFragment : Fragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    setFragmentResultListener("is_favorite_action") { _, result ->
-      val movieId = result.getInt("movie_id")
-      val isFavorite = result.getBoolean("is_favorite")
+    setFragmentResultListener(Constants.FragmentActionKeys.ACTION_KEY_FAVORITE) { _, result ->
+      val movieId = result.getInt(Constants.FragmentArgsName.ARG_MOVIE_ID)
+      val isFavorite = result.getBoolean(Constants.FragmentArgsName.ARG_IS_FAVORITE)
 
       viewModel.isFromDetails = true
       viewModel.isRemovingMovie = !isFavorite

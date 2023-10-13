@@ -1,19 +1,18 @@
 package com.dpfht.android.demomovieflow.navigation
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.android.demomovieflow.R
 import com.dpfht.android.demomovieflow.data.model.Genre
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.android.demomovieflow.framework.Constants
 import com.dpfht.android.demomovieflow.framework.commons.model.MovieArgModel
 import com.dpfht.android.demomovieflow.framework.navigation.NavigationService
 import com.google.gson.Gson
 
 class NavigationServiceImpl(
-  private val navController: NavController,
-  private val activity: AppCompatActivity
+  private val navController: NavController
 ): NavigationService {
 
   override fun navigateToMovieHome() {
@@ -39,9 +38,9 @@ class NavigationServiceImpl(
     builder.scheme("android-app")
       .authority("com.dpfht.android.demomovieflow")
       .appendPath("movie_details_fragment")
-      .appendQueryParameter("movieId", "$movieId")
-      .appendQueryParameter("movieModel", strModel)
-      .appendQueryParameter("isForResult", "$isForResult")
+      .appendQueryParameter(Constants.FragmentArgsName.ARG_MOVIE_ID, "$movieId")
+      .appendQueryParameter(Constants.FragmentArgsName.ARG_MOVIE_MODEL, strModel)
+      .appendQueryParameter(Constants.FragmentArgsName.ARG_IS_FOR_RESULT, "$isForResult")
 
     navController.navigate(NavDeepLinkRequest.Builder
       .fromUri(builder.build())
@@ -53,7 +52,7 @@ class NavigationServiceImpl(
     builder.scheme("android-app")
       .authority("com.dpfht.android.demomovieflow")
       .appendPath("error_message_dialog_fragment")
-      .appendQueryParameter("message", message)
+      .appendQueryParameter(Constants.FragmentArgsName.ARG_MESSAGE, message)
 
     navController.navigate(
       NavDeepLinkRequest.Builder

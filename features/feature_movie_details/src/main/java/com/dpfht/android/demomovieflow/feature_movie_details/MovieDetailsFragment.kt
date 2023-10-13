@@ -12,6 +12,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.dpfht.android.demomovieflow.feature_movie_details.databinding.FragmentMovieDetailsBinding
 import com.dpfht.android.demomovieflow.feature_movie_details.di.DaggerMovieDetailsComponent
+import com.dpfht.android.demomovieflow.framework.Constants
 import com.dpfht.android.demomovieflow.framework.commons.model.MovieArgModel
 import com.dpfht.android.demomovieflow.framework.commons.model.toDomain
 import com.dpfht.android.demomovieflow.framework.di.dependency.NavigationServiceDependency
@@ -57,18 +58,18 @@ class MovieDetailsFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     arguments?.let {
-      val movieId = it.getInt("movieId")
+      val movieId = it.getInt(Constants.FragmentArgsName.ARG_MOVIE_ID)
       if (movieId != -1) {
         viewModel.movieId = movieId
 
-        val strModel = it.getString("movieModel") ?: ""
+        val strModel = it.getString(Constants.FragmentArgsName.ARG_MOVIE_MODEL) ?: ""
         if (strModel.isNotEmpty()) {
           val typeToken = object : TypeToken<MovieArgModel>() {}.type
           val movieModel = Gson().fromJson<MovieArgModel>(strModel, typeToken)
           viewModel.movieEntity = movieModel.toDomain()
         }
 
-        viewModel.isForResult = it.getBoolean("isForResult")
+        viewModel.isForResult = it.getBoolean(Constants.FragmentArgsName.ARG_IS_FOR_RESULT)
 
         observeViewModel()
         setListener()
@@ -148,10 +149,10 @@ class MovieDetailsFragment : Fragment() {
     override fun handleOnBackPressed() {
       if (viewModel.isForResult) {
         val result = Bundle()
-        result.putInt("movie_id", viewModel.movieId)
-        result.putBoolean("is_favorite", viewModel.isFavoriteData.value ?: false)
+        result.putInt(Constants.FragmentArgsName.ARG_MOVIE_ID, viewModel.movieId)
+        result.putBoolean(Constants.FragmentArgsName.ARG_IS_FAVORITE, viewModel.isFavoriteData.value ?: false)
 
-        setFragmentResult("is_favorite_action", result)
+        setFragmentResult(Constants.FragmentActionKeys.ACTION_KEY_FAVORITE, result)
       }
 
       navigationService.navigateUp()

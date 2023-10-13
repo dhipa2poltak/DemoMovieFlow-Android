@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dpfht.android.demomovieflow.feature_error_message.databinding.FragmentErrorMessageDialogBinding
+import com.dpfht.android.demomovieflow.framework.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ErrorMessageDialogFragment : BottomSheetDialogFragment() {
@@ -24,7 +25,7 @@ class ErrorMessageDialogFragment : BottomSheetDialogFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     arguments?.let {
-      val message = it.getString("message")
+      val message = it.getString(Constants.FragmentArgsName.ARG_MESSAGE)
 
       binding.tvMessage.text = message
     }
