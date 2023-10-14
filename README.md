@@ -6,7 +6,7 @@
 | <img src="docs/screenshots/favorite_movies.jpg"> | <img src="docs/screenshots/movie_details.jpg">  | <img src="docs/screenshots/burger_menu.jpg">  |
 
 **APK file:**
-**[Demo Movie Flow v1.1.apk](https://drive.google.com/file/d/1DOybEwMl9W9fBYxRZvxEVJ1xabnK8Blq/view?usp=sharing)**
+**[Demo Movie Flow v1.2.apk](https://drive.google.com/file/d/1k77oe99fvpIJwx_TpySIeGrwhEcI2PG4/view?usp=sharing)**
 
 **Technology Stack:**
 - Kotlin Programming Language
