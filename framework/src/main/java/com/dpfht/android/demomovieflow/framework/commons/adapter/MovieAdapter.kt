@@ -6,6 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.android.demomovieflow.framework.R
 import com.dpfht.android.demomovieflow.framework.commons.adapter.MovieAdapter.ViewHolder
 import com.dpfht.android.demomovieflow.framework.databinding.RowMovieBinding
 import com.squareup.picasso.Picasso
@@ -22,7 +23,7 @@ class MovieAdapter @Inject constructor(
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.binding.tvTitleMovie.text = ""
     holder.binding.tvOverviewMovie.text = ""
-    holder.binding.ivMovie.setImageURI(null)
+    holder.binding.ivMovie.setImageResource(R.drawable.no_image)
     holder.binding.root.setOnClickListener(null)
 
     val movieEntity = getItem(position)
@@ -31,7 +32,10 @@ class MovieAdapter @Inject constructor(
       holder.binding.tvOverviewMovie.text = movieEntity.overview
 
       if (movieEntity.imageUrl.isNotEmpty()) {
-        Picasso.get().load(movieEntity.imageUrl).into(holder.binding.ivMovie)
+        Picasso.get().load(movieEntity.imageUrl)
+          .error(R.drawable.no_image)
+          .placeholder(R.drawable.no_image)
+          .into(holder.binding.ivMovie)
       }
 
       holder.binding.root.setOnClickListener {

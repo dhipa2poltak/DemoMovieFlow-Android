@@ -10,6 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import com.dpfht.android.demomovieflow.framework.R as frameworkR
 import com.dpfht.android.demomovieflow.feature_movie_details.databinding.FragmentMovieDetailsBinding
 import com.dpfht.android.demomovieflow.feature_movie_details.di.DaggerMovieDetailsComponent
 import com.dpfht.android.demomovieflow.framework.Constants
@@ -100,7 +101,12 @@ class MovieDetailsFragment : Fragment() {
       binding.tvDescMovie.text = movieEntity.overview
 
       if (movieEntity.imageUrl.isNotEmpty()) {
-        Picasso.get().load(movieEntity.imageUrl).into(binding.ivImageMovie)
+        Picasso.get().load(movieEntity.imageUrl)
+          .error(frameworkR.drawable.no_image)
+          .placeholder(frameworkR.drawable.no_image)
+          .into(binding.ivImageMovie)
+      } else {
+        binding.ivImageMovie.setImageResource(frameworkR.drawable.no_image)
       }
 
       var strGenres = ""

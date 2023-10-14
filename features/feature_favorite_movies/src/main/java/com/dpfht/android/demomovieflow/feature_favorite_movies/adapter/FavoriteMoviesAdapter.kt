@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.domain.entity.Result
 import com.dpfht.android.demomovieflow.domain.usecase.GetMovieDetailsUseCase
+import com.dpfht.android.demomovieflow.framework.R
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter.ViewHolder
 import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieCacheModel
 import com.dpfht.android.demomovieflow.framework.databinding.RowMovieBinding
@@ -56,14 +57,17 @@ class FavoriteMoviesAdapter @Inject constructor(
     movieEntity?.let {
       binding.tvTitleMovie.text = ""
       binding.tvOverviewMovie.text = ""
-      binding.ivMovie.setImageURI(null)
+      binding.ivMovie.setImageResource(R.drawable.no_image)
       binding.root.setOnClickListener(null)
 
       binding.tvTitleMovie.text = movieEntity.title
       binding.tvOverviewMovie.text = movieEntity.overview
 
       if (movieEntity.imageUrl.isNotEmpty()) {
-        Picasso.get().load(movieEntity.imageUrl).into(binding.ivMovie)
+        Picasso.get().load(movieEntity.imageUrl)
+          .error(R.drawable.no_image)
+          .placeholder(R.drawable.no_image)
+          .into(binding.ivMovie)
       }
 
       binding.root.setOnClickListener {
