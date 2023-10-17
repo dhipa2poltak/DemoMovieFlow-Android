@@ -15,7 +15,7 @@ import com.dpfht.android.demomovieflow.domain.usecase.GetPopularMoviesUseCase
 import com.dpfht.android.demomovieflow.domain.usecase.GetPopularMoviesUseCaseImpl
 import com.dpfht.android.demomovieflow.domain.usecase.SearchMovieUseCase
 import com.dpfht.android.demomovieflow.domain.usecase.SearchMovieUseCaseImpl
-import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieCacheModel
+import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieVWModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -61,7 +61,7 @@ class ViewModelModule {
   }
 
   @Provides
-  fun provideArrayListFavoriteMovieCacheModel(): ArrayList<FavoriteMovieCacheModel> {
+  fun provideArrayListFavoriteMovieCacheModel(): ArrayList<FavoriteMovieVWModel> {
     return arrayListOf()
   }
 }

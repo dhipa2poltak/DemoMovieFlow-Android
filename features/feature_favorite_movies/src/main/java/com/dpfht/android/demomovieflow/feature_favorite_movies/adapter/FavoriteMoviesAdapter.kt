@@ -8,7 +8,7 @@ import com.dpfht.android.demomovieflow.domain.entity.Result
 import com.dpfht.android.demomovieflow.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.android.demomovieflow.framework.R
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter.ViewHolder
-import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieCacheModel
+import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieVWModel
 import com.dpfht.android.demomovieflow.framework.databinding.RowMovieBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +19,7 @@ class FavoriteMoviesAdapter @Inject constructor(
   private val getMovieDetailsUseCase: GetMovieDetailsUseCase
 ): RecyclerView.Adapter<ViewHolder>() {
 
-  lateinit var cacheModels: ArrayList<FavoriteMovieCacheModel>
+  lateinit var cacheModels: ArrayList<FavoriteMovieVWModel>
   lateinit var scope: CoroutineScope
 
   var onClickMovieCallback: ((MovieEntity) -> Unit)? = null

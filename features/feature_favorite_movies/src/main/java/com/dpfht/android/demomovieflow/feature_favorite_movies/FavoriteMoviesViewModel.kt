@@ -10,7 +10,7 @@ import com.dpfht.android.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEn
 import com.dpfht.android.demomovieflow.domain.usecase.DeleteFavoriteMovieUseCase
 import com.dpfht.android.demomovieflow.domain.usecase.GetAllFavoriteMoviesUseCase
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter
-import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieCacheModel
+import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieVWModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class FavoriteMoviesViewModel @Inject constructor(
   private val getAllFavoriteMoviesUseCase: GetAllFavoriteMoviesUseCase,
   private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
-  private val cacheModels: ArrayList<FavoriteMovieCacheModel>,
+  private val cacheModels: ArrayList<FavoriteMovieVWModel>,
   val adapter: FavoriteMoviesAdapter
 ): ViewModel() {
 
@@ -74,7 +74,7 @@ class FavoriteMoviesViewModel @Inject constructor(
     _isShowDialogLoading.postValue(false)
     cacheModels.clear()
     adapter.notifyDataSetChanged()
-    cacheModels.addAll(list.map { FavoriteMovieCacheModel(it, null) })
+    cacheModels.addAll(list.map { FavoriteMovieVWModel(it, null) })
     adapter.notifyDataSetChanged()
     _isNoData.postValue(cacheModels.isEmpty())
   }
