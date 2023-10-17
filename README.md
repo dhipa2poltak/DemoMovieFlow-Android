@@ -6,7 +6,7 @@
 | <img src="docs/screenshots/favorite_movies.jpg"> | <img src="docs/screenshots/movie_details.jpg">  | <img src="docs/screenshots/burger_menu.jpg">  |
 
 **APK file:**
-**[Demo Movie Flow v1.2.apk](https://drive.google.com/file/d/1k77oe99fvpIJwx_TpySIeGrwhEcI2PG4/view?usp=sharing)**
+**[Demo Movie Flow v1.3.apk](https://drive.google.com/file/d/1R-kwJdlOa_MeuqaIKkbiCnJYs7BeQF4T/view?usp=sharing)**
 
 **Technology Stack:**
 - Kotlin Programming Language
@@ -14,7 +14,7 @@
 - MVVM Architecture Pattern
 - Hilt Dependency Injection
 - Navigation Graph
-- View Binding
+- View Binding, Data Binding
 - ViewModel
 - LiveData
 - ROOM Database
