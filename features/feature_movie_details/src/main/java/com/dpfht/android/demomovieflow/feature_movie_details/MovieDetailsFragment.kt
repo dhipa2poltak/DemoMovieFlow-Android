@@ -1,58 +1,27 @@
 package com.dpfht.android.demomovieflow.feature_movie_details
 
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
-import com.dpfht.android.demomovieflow.framework.R as frameworkR
 import com.dpfht.android.demomovieflow.feature_movie_details.databinding.FragmentMovieDetailsBinding
-import com.dpfht.android.demomovieflow.feature_movie_details.di.DaggerMovieDetailsComponent
 import com.dpfht.android.demomovieflow.framework.Constants
+import com.dpfht.android.demomovieflow.framework.commons.base.BaseFragment
 import com.dpfht.android.demomovieflow.framework.commons.model.MovieArgModel
 import com.dpfht.android.demomovieflow.framework.commons.model.toDomain
-import com.dpfht.android.demomovieflow.framework.di.dependency.NavigationServiceDependency
-import com.dpfht.android.demomovieflow.framework.navigation.NavigationService
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
-import javax.inject.Inject
+import com.dpfht.android.demomovieflow.framework.R as frameworkR
 
 
 @AndroidEntryPoint
-class MovieDetailsFragment : Fragment() {
+class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>(R.layout.fragment_movie_details) {
 
-  private lateinit var binding: FragmentMovieDetailsBinding
   private val viewModel by viewModels<MovieDetailsViewModel>()
-
-  @Inject
-  lateinit var navigationService: NavigationService
-
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-
-    DaggerMovieDetailsComponent.builder()
-      .context(requireContext())
-      .navDependency(EntryPointAccessors.fromActivity(requireActivity(), NavigationServiceDependency::class.java))
-      .build()
-      .inject(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-
-    return binding.root
-  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
