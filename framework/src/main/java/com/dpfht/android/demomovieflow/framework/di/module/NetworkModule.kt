@@ -1,7 +1,7 @@
 package com.dpfht.android.demomovieflow.framework.di.module
 
 import android.content.Context
-import com.dpfht.android.demomovieflow.data.datasource.RemoteDataSource
+import com.dpfht.demomovieflow.data.datasource.RemoteDataSource
 import com.dpfht.android.demomovieflow.framework.BuildConfig
 import com.dpfht.android.demomovieflow.framework.Constants
 import com.dpfht.android.demomovieflow.framework.data.datasource.remote.RemoteDataSourceImpl

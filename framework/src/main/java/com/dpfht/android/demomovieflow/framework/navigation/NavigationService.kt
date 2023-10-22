@@ -1,6 +1,6 @@
 package com.dpfht.android.demomovieflow.framework.navigation
 
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
 
 interface NavigationService {
 

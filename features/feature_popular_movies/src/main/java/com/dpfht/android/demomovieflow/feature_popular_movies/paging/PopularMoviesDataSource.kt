@@ -2,9 +2,9 @@ package com.dpfht.android.demomovieflow.feature_popular_movies.paging
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
-import com.dpfht.android.demomovieflow.domain.entity.Result
-import com.dpfht.android.demomovieflow.domain.usecase.GetPopularMoviesUseCase
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.domain.entity.Result
+import com.dpfht.demomovieflow.domain.usecase.GetPopularMoviesUseCase
 import javax.inject.Inject
 
 class PopularMoviesDataSource @Inject constructor(

@@ -1,7 +1,7 @@
 package com.dpfht.android.demomovieflow.framework.di.module
 
 import android.content.Context
-import com.dpfht.android.demomovieflow.data.datasource.LocalDataSource
+import com.dpfht.demomovieflow.data.datasource.LocalDataSource
 import com.dpfht.android.demomovieflow.framework.data.datasource.local.LocalDataSourceImpl
 import com.dpfht.android.demomovieflow.framework.data.datasource.local.room.db.AppDB
 import dagger.Module

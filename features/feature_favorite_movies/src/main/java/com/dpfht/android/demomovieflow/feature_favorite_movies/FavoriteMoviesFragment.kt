@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.feature_favorite_movies.databinding.FragmentFavoriteMoviesBinding
 import com.dpfht.android.demomovieflow.framework.Constants
 import com.dpfht.android.demomovieflow.framework.commons.base.BaseFragment

@@ -1,7 +1,7 @@
 package com.dpfht.android.demomovieflow.framework.data.datasource.remote.rest
 
-import com.dpfht.android.demomovieflow.data.model.MovieDetailsResponse
-import com.dpfht.android.demomovieflow.data.model.MovieResponse
+import com.dpfht.demomovieflow.data.model.MovieDetailsResponse
+import com.dpfht.demomovieflow.data.model.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

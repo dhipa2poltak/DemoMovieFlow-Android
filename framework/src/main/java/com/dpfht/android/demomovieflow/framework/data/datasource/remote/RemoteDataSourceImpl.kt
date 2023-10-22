@@ -1,16 +1,16 @@
 package com.dpfht.android.demomovieflow.framework.data.datasource.remote
 
 import android.content.Context
-import com.dpfht.android.demomovieflow.data.datasource.RemoteDataSource
-import com.dpfht.android.demomovieflow.data.model.ErrorResponse
-import com.dpfht.android.demomovieflow.data.model.toDomain
-import com.dpfht.android.demomovieflow.domain.entity.MovieDomain
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
-import com.dpfht.android.demomovieflow.domain.entity.Result
-import com.dpfht.android.demomovieflow.domain.entity.Result.ErrorResult
-import com.dpfht.android.demomovieflow.domain.entity.Result.Success
+import com.dpfht.demomovieflow.data.datasource.RemoteDataSource
+import com.dpfht.demomovieflow.data.model.ErrorResponse
+import com.dpfht.demomovieflow.data.model.toDomain
+import com.dpfht.demomovieflow.domain.entity.Result
+import com.dpfht.demomovieflow.domain.entity.Result.ErrorResult
+import com.dpfht.demomovieflow.domain.entity.Result.Success
 import com.dpfht.android.demomovieflow.framework.R
 import com.dpfht.android.demomovieflow.framework.data.datasource.remote.rest.RestService
+import com.dpfht.demomovieflow.domain.entity.MovieDomain
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineDispatcher

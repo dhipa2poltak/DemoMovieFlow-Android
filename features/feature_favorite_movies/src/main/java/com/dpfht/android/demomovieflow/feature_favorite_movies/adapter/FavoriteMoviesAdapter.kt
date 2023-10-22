@@ -3,13 +3,13 @@ package com.dpfht.android.demomovieflow.feature_favorite_movies.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
-import com.dpfht.android.demomovieflow.domain.entity.Result
-import com.dpfht.android.demomovieflow.domain.usecase.GetMovieDetailsUseCase
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.domain.entity.Result
 import com.dpfht.android.demomovieflow.framework.R
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter.ViewHolder
 import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieVWModel
 import com.dpfht.android.demomovieflow.framework.databinding.RowMovieBinding
+import com.dpfht.demomovieflow.domain.usecase.GetMovieDetailsUseCase
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.dpfht.android.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
+import com.dpfht.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 
 @Entity(tableName = "tbl_favorite_movies", indices = [Index(value = ["movie_id"], unique = true)])
 data class FavoriteMovieDBModel(
@@ -16,5 +16,8 @@ data class FavoriteMovieDBModel(
 )
 
 fun FavoriteMovieDBModel.toDomain(): FavoriteMovieDBEntity {
-  return FavoriteMovieDBEntity(id = this.id ?: 0, movieId = this.movieId ?: 0)
+  return FavoriteMovieDBEntity(
+    id = this.id ?: 0,
+    movieId = this.movieId ?: 0
+  )
 }

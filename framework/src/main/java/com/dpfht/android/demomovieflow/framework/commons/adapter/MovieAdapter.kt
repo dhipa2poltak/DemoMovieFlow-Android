@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.framework.R
 import com.dpfht.android.demomovieflow.framework.commons.adapter.MovieAdapter.ViewHolder
 import com.dpfht.android.demomovieflow.framework.databinding.RowMovieBinding

@@ -1,9 +1,9 @@
 package com.dpfht.android.demomovieflow.framework.commons.model
 
 import androidx.annotation.Keep
-import com.dpfht.android.demomovieflow.data.model.Genre
-import com.dpfht.android.demomovieflow.data.model.toDomain
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.data.model.Genre
+import com.dpfht.demomovieflow.data.model.toDomain
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 

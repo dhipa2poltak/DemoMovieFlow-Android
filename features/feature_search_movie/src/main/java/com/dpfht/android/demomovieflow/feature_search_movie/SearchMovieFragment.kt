@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.android.demomovieflow.feature_search_movie.databinding.FragmentSearchMovieBinding
 import com.dpfht.android.demomovieflow.framework.commons.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint

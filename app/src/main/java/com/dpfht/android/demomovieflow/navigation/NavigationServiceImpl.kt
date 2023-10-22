@@ -4,11 +4,11 @@ import android.net.Uri
 import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.android.demomovieflow.R
-import com.dpfht.android.demomovieflow.data.model.Genre
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.data.model.Genre
 import com.dpfht.android.demomovieflow.framework.Constants
 import com.dpfht.android.demomovieflow.framework.commons.model.MovieArgModel
 import com.dpfht.android.demomovieflow.framework.navigation.NavigationService
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.google.gson.Gson
 
 class NavigationServiceImpl(

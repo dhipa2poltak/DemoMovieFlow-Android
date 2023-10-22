@@ -2,9 +2,9 @@ package com.dpfht.android.demomovieflow.feature_search_movie.paging
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
-import com.dpfht.android.demomovieflow.domain.entity.MovieEntity
-import com.dpfht.android.demomovieflow.domain.entity.Result
-import com.dpfht.android.demomovieflow.domain.usecase.SearchMovieUseCase
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
+import com.dpfht.demomovieflow.domain.entity.Result
+import com.dpfht.demomovieflow.domain.usecase.SearchMovieUseCase
 import javax.inject.Inject
 
 class SearchMovieDataSource @Inject constructor(

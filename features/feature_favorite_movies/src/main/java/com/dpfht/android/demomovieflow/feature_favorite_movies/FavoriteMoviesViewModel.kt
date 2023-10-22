@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dpfht.android.demomovieflow.domain.entity.Result
-import com.dpfht.android.demomovieflow.domain.entity.VoidResult
-import com.dpfht.android.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
-import com.dpfht.android.demomovieflow.domain.usecase.DeleteFavoriteMovieUseCase
-import com.dpfht.android.demomovieflow.domain.usecase.GetAllFavoriteMoviesUseCase
+import com.dpfht.demomovieflow.domain.entity.Result
+import com.dpfht.demomovieflow.domain.entity.VoidResult
+import com.dpfht.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter
 import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieVWModel
+import com.dpfht.demomovieflow.domain.entity.VoidResult.Success
+import com.dpfht.demomovieflow.domain.usecase.DeleteFavoriteMovieUseCase
+import com.dpfht.demomovieflow.domain.usecase.GetAllFavoriteMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -96,7 +97,7 @@ class FavoriteMoviesViewModel @Inject constructor(
       viewModelScope.launch {
         deleteFavoriteMovieUseCase(movieEntity).collect { voidResult ->
           when (voidResult) {
-            VoidResult.Success -> {
+            Success -> {
               onSuccessDeleteFavoriteMovie(movieId)
             }
             is VoidResult.Error -> {
