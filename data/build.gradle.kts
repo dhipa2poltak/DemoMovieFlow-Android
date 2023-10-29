@@ -12,7 +12,5 @@ dependencies {
   implementation(project(":domain"))
 
   implementation(Deps.gson)
-  implementation(Deps.coroutinesAndroid)
-
   implementation(Deps.annotation)
 }

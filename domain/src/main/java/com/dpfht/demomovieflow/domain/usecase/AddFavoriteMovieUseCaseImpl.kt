@@ -5,12 +5,19 @@ import com.dpfht.demomovieflow.domain.entity.Result
 import com.dpfht.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 import com.dpfht.demomovieflow.domain.repository.AppRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class AddFavoriteMovieUseCaseImpl(
   private val appRepository: AppRepository
 ): AddFavoriteMovieUseCase {
 
-  override suspend operator fun invoke(movie: MovieEntity): Flow<Result<FavoriteMovieDBEntity>> {
-    return appRepository.addFavoriteMovie(movie)
+  override suspend operator fun invoke(movie: MovieEntity): Flow<Result<FavoriteMovieDBEntity>> = flow {
+    try {
+      emit(Result.Success(appRepository.addFavoriteMovie(movie)))
+    } catch (e: Exception) {
+      e.message?.let {
+        emit(Result.ErrorResult(it))
+      }
+    }
   }
 }
