@@ -29,10 +29,10 @@ class RemoteDataSourceTest {
   private lateinit var remoteDataSource: RemoteDataSource
 
   @Mock
-  private lateinit var restService: RestService
+  private lateinit var context: Context
 
   @Mock
-  private lateinit var context: Context
+  private lateinit var restService: RestService
 
   private val page = 1
   private val movieId = 101
