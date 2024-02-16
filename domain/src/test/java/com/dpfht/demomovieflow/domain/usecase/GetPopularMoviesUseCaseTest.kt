@@ -19,8 +19,8 @@ class GetPopularMoviesUseCaseTest: BaseUseCaseTest() {
 
   private lateinit var getPopularMoviesUseCase: GetPopularMoviesUseCase
 
-  private val movieDomain = MovieDomain(1, listOf(), 10, 10)
   private val page = 1
+  private val movieDomain = MovieDomain(page, listOf(), 10, 10)
 
   @Before
   fun setup() {

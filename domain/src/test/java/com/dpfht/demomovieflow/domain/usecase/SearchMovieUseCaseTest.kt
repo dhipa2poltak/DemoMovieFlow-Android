@@ -19,9 +19,9 @@ class SearchMovieUseCaseTest: BaseUseCaseTest() {
 
   private lateinit var searchMovieUseCase: SearchMovieUseCase
 
-  private val movieDomain = MovieDomain(1, listOf(), 10, 10)
   private val page = 1
   private val key = "lope lope"
+  private val movieDomain = MovieDomain(page, listOf(), 10, 10)
 
   @Before
   fun setup() {

@@ -13,4 +13,8 @@ dependencies {
 
   implementation(Deps.gson)
   implementation(Deps.annotation)
+
+  testImplementation(Deps.jUnit)
+  testImplementation(Deps.mockitoKotlin)
+  testImplementation(Deps.coroutinesTest)
 }
