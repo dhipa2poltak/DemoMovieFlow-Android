@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class ErrorResponse(
+data class ApiErrorResponse(
 
   val success: Boolean? = false,
   @SerializedName("status_code")

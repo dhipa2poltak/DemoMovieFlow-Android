@@ -34,4 +34,6 @@ object Versions {
 
   const val fragmentKtx = "1.6.1"
   const val lifecycleViewModel = "2.6.1"
+
+  const val mockWebServer = "4.10.0"
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import com.dpfht.android.demomovieflow.framework.R
 import com.dpfht.android.demomovieflow.framework.data.datasource.remote.rest.RestService
 import com.dpfht.demomovieflow.data.datasource.RemoteDataSource
-import com.dpfht.demomovieflow.data.model.ErrorResponse
+import com.dpfht.demomovieflow.data.model.ApiErrorResponse
 import com.dpfht.demomovieflow.data.model.toDomain
 import com.dpfht.demomovieflow.domain.entity.AppException
 import com.dpfht.demomovieflow.domain.entity.MovieDomain
@@ -58,12 +58,12 @@ class RemoteDataSourceImpl(
     }
   }
 
-  private fun convertErrorBody(t: HttpException): ErrorResponse? {
+  private fun convertErrorBody(t: HttpException): ApiErrorResponse? {
     return try {
       t.response()?.errorBody()?.source().let {
         val json = it?.readString(Charset.defaultCharset())
-        val typeToken = object : TypeToken<ErrorResponse>() {}.type
-        val errorResponse = Gson().fromJson<ErrorResponse>(json, typeToken)
+        val typeToken = object : TypeToken<ApiErrorResponse>() {}.type
+        val errorResponse = Gson().fromJson<ApiErrorResponse>(json, typeToken)
         errorResponse
       }
     } catch (e: Exception) {
