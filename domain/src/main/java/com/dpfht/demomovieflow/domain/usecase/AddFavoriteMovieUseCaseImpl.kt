@@ -1,5 +1,6 @@
 package com.dpfht.demomovieflow.domain.usecase
 
+import com.dpfht.demomovieflow.domain.entity.AppException
 import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.demomovieflow.domain.entity.Result
 import com.dpfht.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
@@ -14,10 +15,8 @@ class AddFavoriteMovieUseCaseImpl(
   override suspend operator fun invoke(movie: MovieEntity): Flow<Result<FavoriteMovieDBEntity>> = flow {
     try {
       emit(Result.Success(appRepository.addFavoriteMovie(movie)))
-    } catch (e: Exception) {
-      e.message?.let {
-        emit(Result.ErrorResult(it))
-      }
+    } catch (e: AppException) {
+      emit(Result.Error(e.message))
     }
   }
 }

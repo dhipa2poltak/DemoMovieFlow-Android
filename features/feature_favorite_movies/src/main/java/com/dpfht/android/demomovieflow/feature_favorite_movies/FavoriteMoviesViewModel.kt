@@ -9,6 +9,7 @@ import com.dpfht.demomovieflow.domain.entity.VoidResult
 import com.dpfht.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter
 import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieVWModel
+import com.dpfht.demomovieflow.domain.entity.Result.Error
 import com.dpfht.demomovieflow.domain.entity.VoidResult.Success
 import com.dpfht.demomovieflow.domain.usecase.DeleteFavoriteMovieUseCase
 import com.dpfht.demomovieflow.domain.usecase.GetAllFavoriteMoviesUseCase
@@ -63,7 +64,7 @@ class FavoriteMoviesViewModel @Inject constructor(
           is Result.Success -> {
             onSuccessGetAllFavoriteMovies(result.value)
           }
-          is Result.ErrorResult -> {
+          is Error -> {
             onErrorGetAllFavoriteMovies(result.message)
           }
         }

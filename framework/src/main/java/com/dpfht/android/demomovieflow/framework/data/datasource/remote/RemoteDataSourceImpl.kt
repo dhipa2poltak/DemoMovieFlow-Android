@@ -6,6 +6,7 @@ import com.dpfht.android.demomovieflow.framework.data.datasource.remote.rest.Res
 import com.dpfht.demomovieflow.data.datasource.RemoteDataSource
 import com.dpfht.demomovieflow.data.model.ErrorResponse
 import com.dpfht.demomovieflow.data.model.toDomain
+import com.dpfht.demomovieflow.domain.entity.AppException
 import com.dpfht.demomovieflow.domain.entity.MovieDomain
 import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.google.gson.Gson
@@ -42,15 +43,15 @@ class RemoteDataSourceImpl(
         apiCall.invoke()
       } catch (t: Throwable) {
         throw when (t) {
-          is IOException -> Exception(context.getString(R.string.framework_text_error_connection))
+          is IOException -> AppException(context.getString(R.string.framework_text_error_connection))
           is HttpException -> {
             //val code = t.code()
             val errorResponse = convertErrorBody(t)
 
-            Exception(errorResponse?.statusMessage ?: context.getString(R.string.framework_text_error_http))
+            AppException(errorResponse?.statusMessage ?: context.getString(R.string.framework_text_error_http))
           }
           else -> {
-            Exception(context.getString(R.string.framework_text_error_conversion))
+            AppException(context.getString(R.string.framework_text_error_conversion))
           }
         }
       }

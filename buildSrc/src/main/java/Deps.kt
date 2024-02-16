@@ -4,6 +4,10 @@ object Deps {
   val material = "com.google.android.material:material:${Versions.material}"
   val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
   val jUnit = "junit:junit:${Versions.jUnit}"
+  val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesTest}"
+  val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
+  val mockitoInline = "org.mockito:mockito-inline:${Versions.mockitoInline}"
+
   val jUnitExt = "androidx.test.ext:junit:${Versions.jUnitExt}"
   val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 

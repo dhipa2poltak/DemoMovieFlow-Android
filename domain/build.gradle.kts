@@ -10,4 +10,8 @@ java {
 
 dependencies {
   implementation(Deps.coroutinesAndroid)
+
+  testImplementation(Deps.jUnit)
+  testImplementation(Deps.mockitoKotlin)
+  testImplementation(Deps.coroutinesTest)
 }

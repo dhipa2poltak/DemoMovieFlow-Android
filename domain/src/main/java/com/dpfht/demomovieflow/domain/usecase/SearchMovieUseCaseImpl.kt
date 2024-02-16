@@ -1,5 +1,6 @@
 package com.dpfht.demomovieflow.domain.usecase
 
+import com.dpfht.demomovieflow.domain.entity.AppException
 import com.dpfht.demomovieflow.domain.entity.MovieDomain
 import com.dpfht.demomovieflow.domain.entity.Result
 import com.dpfht.demomovieflow.domain.repository.AppRepository
@@ -13,10 +14,8 @@ class SearchMovieUseCaseImpl(
   override suspend operator fun invoke(query: String, page: Int): Flow<Result<MovieDomain>> = flow {
     try {
       emit(Result.Success(appRepository.searchMovie(query, page)))
-    } catch (e: Exception) {
-      e.message?.let {
-        emit(Result.ErrorResult(it))
-      }
+    } catch (e: AppException) {
+      emit(Result.Error(e.message))
     }
   }
 }

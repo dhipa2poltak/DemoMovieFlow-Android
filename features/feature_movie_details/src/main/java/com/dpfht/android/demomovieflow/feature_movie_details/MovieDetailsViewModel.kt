@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.demomovieflow.domain.entity.Result
+import com.dpfht.demomovieflow.domain.entity.Result.Error
 import com.dpfht.demomovieflow.domain.entity.VoidResult
 import com.dpfht.demomovieflow.domain.entity.VoidResult.Success
 import com.dpfht.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
@@ -60,7 +61,7 @@ class MovieDetailsViewModel @Inject constructor(
               checkIsFavorite(result.value)
             }
 
-            is Result.ErrorResult -> {
+            is Error -> {
               onErrorGetMovieDetails(result.message)
             }
           }
@@ -91,7 +92,7 @@ class MovieDetailsViewModel @Inject constructor(
           is Result.Success -> {
             onSuccessCheckIsFavorite(result.value)
           }
-          is Result.ErrorResult -> {
+          is Error -> {
             onErrorCheckIsFavorite(result.message)
           }
         }
@@ -125,7 +126,7 @@ class MovieDetailsViewModel @Inject constructor(
             is Result.Success -> {
               onSuccessAddFavoriteMovie(result.value)
             }
-            is Result.ErrorResult -> {
+            is Error -> {
               onErrorAddFavoriteMovie(result.message)
             }
           }

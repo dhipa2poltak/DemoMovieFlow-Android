@@ -9,6 +9,7 @@ import com.dpfht.android.demomovieflow.framework.R
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter.ViewHolder
 import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieVWModel
 import com.dpfht.android.demomovieflow.framework.databinding.RowMovieBinding
+import com.dpfht.demomovieflow.domain.entity.Result.Error
 import com.dpfht.demomovieflow.domain.usecase.GetMovieDetailsUseCase
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -42,7 +43,7 @@ class FavoriteMoviesAdapter @Inject constructor(
               onSuccessGetMovieDetails(holder.binding, cacheModel.movieEntity)
             }
 
-            is Result.ErrorResult -> {
+            is Error -> {
               onErrorGetMovieDetails(result.message)
             }
           }

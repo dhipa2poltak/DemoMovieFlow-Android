@@ -5,6 +5,10 @@ object Versions {
   const val material = "1.9.0"
   const val constraintLayout = "2.1.4"
   const val jUnit = "4.13.2"
+  const val coroutinesTest = "1.6.2"
+  const val mockitoKotlin = "5.2.1"
+  const val mockitoInline = "5.2.0"
+
   const val jUnitExt = "1.1.5"
   const val espresso = "3.5.1"
 

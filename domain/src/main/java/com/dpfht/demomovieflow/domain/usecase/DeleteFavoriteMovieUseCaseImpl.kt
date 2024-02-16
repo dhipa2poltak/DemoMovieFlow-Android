@@ -1,5 +1,6 @@
 package com.dpfht.demomovieflow.domain.usecase
 
+import com.dpfht.demomovieflow.domain.entity.AppException
 import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.demomovieflow.domain.entity.VoidResult
 import com.dpfht.demomovieflow.domain.repository.AppRepository
@@ -15,10 +16,8 @@ class DeleteFavoriteMovieUseCaseImpl(
       appRepository.deleteFavoriteMovie(movie)
 
       emit(VoidResult.Success)
-    } catch (e: Exception) {
-      e.message?.let {
-        emit(VoidResult.Error(it))
-      }
+    } catch (e: AppException) {
+      emit(VoidResult.Error(e.message))
     }
   }
 }

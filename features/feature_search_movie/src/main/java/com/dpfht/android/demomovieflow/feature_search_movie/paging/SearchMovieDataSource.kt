@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
 import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.demomovieflow.domain.entity.Result
+import com.dpfht.demomovieflow.domain.entity.Result.Error
 import com.dpfht.demomovieflow.domain.usecase.SearchMovieUseCase
 import javax.inject.Inject
 
@@ -29,7 +30,7 @@ class SearchMovieDataSource @Inject constructor(
             prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
             nextKey = if (result.value.results.isEmpty()) null else currentLoadingPageKey + 1
           }
-          is Result.ErrorResult -> {
+          is Error -> {
             throw Exception(result.message)
           }
         }

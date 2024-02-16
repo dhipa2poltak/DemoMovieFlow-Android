@@ -6,6 +6,7 @@ import com.dpfht.android.demomovieflow.framework.data.datasource.local.room.db.A
 import com.dpfht.android.demomovieflow.framework.data.datasource.local.room.model.FavoriteMovieDBModel
 import com.dpfht.android.demomovieflow.framework.data.datasource.local.room.model.toDomain
 import com.dpfht.demomovieflow.data.datasource.LocalDataSource
+import com.dpfht.demomovieflow.domain.entity.AppException
 import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +22,7 @@ class LocalDataSourceImpl(
       return withContext(Dispatchers.IO) { appDB.favoriteMovieDao().getAllFavoriteMovies().map { it.toDomain() }}
     } catch (e: Exception) {
       e.printStackTrace()
-      throw Exception(context.getString(R.string.framework_text_fail_get_all_favorite_movies))
+      throw AppException(context.getString(R.string.framework_text_fail_get_all_favorite_movies))
     }
   }
 
@@ -36,7 +37,7 @@ class LocalDataSourceImpl(
       }
     } catch (e: Exception) {
       e.printStackTrace()
-      throw Exception(context.getString(R.string.framework_text_fail_get_favorite_movie))
+      throw AppException(context.getString(R.string.framework_text_fail_get_favorite_movie))
     }
   }
 
@@ -55,7 +56,7 @@ class LocalDataSourceImpl(
       return dbEntity
     } catch (e: Exception) {
       e.printStackTrace()
-      throw Exception(context.getString(R.string.framework_text_fail_add_favorite_movie))
+      throw AppException(context.getString(R.string.framework_text_fail_add_favorite_movie))
     }
   }
 
@@ -64,7 +65,7 @@ class LocalDataSourceImpl(
       appDB.favoriteMovieDao().deleteFavoriteMovie(movie.id)
     } catch (e: Exception) {
       e.printStackTrace()
-      throw Exception(context.getString(R.string.framework_text_fail_delete_favorite_movie))
+      throw AppException(context.getString(R.string.framework_text_fail_delete_favorite_movie))
     }
   }
 }
