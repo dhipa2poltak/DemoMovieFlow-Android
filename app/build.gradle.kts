@@ -94,15 +94,8 @@ android {
 
 dependencies {
 
-  implementation(project(":domain"))
-  implementation(project(":data"))
   implementation(project(":framework"))
-  implementation(project(":features:feature_splash"))
-  implementation(project(":features:feature_error_message"))
-  implementation(project(":features:feature_popular_movies"))
-  implementation(project(":features:feature_search_movie"))
-  implementation(project(":features:feature_favorite_movies"))
-  implementation(project(":features:feature_movie_details"))
+  implementation(project(":navigation"))
 
   implementation(Deps.coreKtx)
   implementation(Deps.appCompat)
@@ -117,6 +110,4 @@ dependencies {
 
   implementation(Deps.hilt)
   kapt(Deps.hiltCompiler)
-
-  implementation(Deps.gson)
 }

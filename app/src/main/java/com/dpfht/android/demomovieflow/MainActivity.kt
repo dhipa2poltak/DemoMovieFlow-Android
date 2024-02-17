@@ -13,6 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dpfht.android.demomovieflow.databinding.ActivityMainBinding
+import com.dpfht.android.demomovieflow.framework.R as frameworkR
 import com.dpfht.android.demomovieflow.view.about.AboutDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     setSupportActionBar(binding.appBarMain.toolbar)
     title = "${getString(R.string.app_name)}${getString(R.string.running_mode)}"
 
-    val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+    val navHostFragment = supportFragmentManager.findFragmentById(frameworkR.id.nav_host_fragment) as NavHostFragment
     navController = navHostFragment.navController
 
     appBarConfiguration = AppBarConfiguration(setOf(R.id.popularMoviesFragment, R.id.searchMovieFragment, R.id.favoriteMoviesFragment), binding.drawerLayout)
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
   }
 
   override fun onSupportNavigateUp(): Boolean {
-    if (navController.currentDestination?.id == R.id.movieDetailsFragment) {
+    if (navController.currentDestination?.id == frameworkR.id.movieDetailsFragment) {
       onBackPressed()
       return true
     }
