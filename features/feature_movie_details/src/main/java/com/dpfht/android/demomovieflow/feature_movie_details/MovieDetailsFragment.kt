@@ -65,34 +65,33 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>(R.layout.
       }
     }
 
-    viewModel.movieData.observe(viewLifecycleOwner) { movieEntity ->
-      binding.tvTitleMovie.text = movieEntity.title
-      binding.tvDescMovie.text = movieEntity.overview
+    viewModel.titleData.observe(viewLifecycleOwner) { title ->
+      binding.tvTitleMovie.text = title
+    }
 
-      if (movieEntity.imageUrl.isNotEmpty()) {
-        Picasso.get().load(movieEntity.imageUrl)
+    viewModel.overviewData.observe(viewLifecycleOwner) { overview ->
+      binding.tvDescMovie.text = overview
+    }
+
+    viewModel.imageUrlData.observe(viewLifecycleOwner) { imageUrl ->
+      if (imageUrl.isNotEmpty()) {
+        Picasso.get().load(imageUrl)
           .error(frameworkR.drawable.no_image)
           .placeholder(frameworkR.drawable.no_image)
           .into(binding.ivImageMovie)
       } else {
         binding.ivImageMovie.setImageResource(frameworkR.drawable.no_image)
       }
+    }
 
-      var strGenres = ""
-      for (genre in movieEntity.genres) {
-        if (strGenres.isEmpty()) {
-          strGenres = genre.name
-        } else {
-          strGenres += ", ${genre.name}"
-        }
-      }
+    viewModel.genres.observe(viewLifecycleOwner) { genres ->
+      binding.tvGenresMovie.text = genres
 
-      if (strGenres.isNotEmpty()) {
-        binding.tvGenresMovie.text = strGenres
-        binding.tvGenresMovie.visibility = View.VISIBLE
+
+      binding.tvGenresMovie.visibility = if (genres.isNotEmpty()) {
+        View.VISIBLE
       } else {
-        binding.tvGenresMovie.text = strGenres
-        binding.tvGenresMovie.visibility = View.INVISIBLE
+        View.INVISIBLE
       }
     }
 

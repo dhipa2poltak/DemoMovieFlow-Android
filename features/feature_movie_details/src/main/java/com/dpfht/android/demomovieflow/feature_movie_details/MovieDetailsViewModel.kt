@@ -35,13 +35,23 @@ class MovieDetailsViewModel @Inject constructor(
   private val _modalMessage = MutableLiveData<String>()
   val modalMessage: LiveData<String> = _modalMessage
 
-  private val _movieData = MutableLiveData<MovieEntity>()
-  val movieData: LiveData<MovieEntity> = _movieData
+  private val _titleData = MutableLiveData<String>()
+  val titleData: LiveData<String> = _titleData
+
+  private val _overviewData = MutableLiveData<String>()
+  val overviewData: LiveData<String> = _overviewData
+
+  private val _imageUrlData = MutableLiveData<String>()
+  val imageUrlData: LiveData<String> = _imageUrlData
+
+  private val _genres = MutableLiveData<String>()
+  val genres: LiveData<String> = _genres
 
   private val _isFavoriteData = MutableLiveData<Boolean>()
   val isFavoriteData: LiveData<Boolean> = _isFavoriteData
 
   var movieId = -1
+
   var movieEntity: MovieEntity? = null
   var isForResult = false
 
@@ -76,7 +86,26 @@ class MovieDetailsViewModel @Inject constructor(
   }
 
   private fun onSuccessGetMovieDetails(movieEntity: MovieEntity) {
-    _movieData.postValue(movieEntity)
+    movieId = movieEntity.id
+
+    val title = movieEntity.title
+    val overview = movieEntity.overview
+    val imageUrl = movieEntity.imageUrl
+
+    _titleData.postValue(title)
+    _overviewData.postValue(overview)
+    _imageUrlData.postValue(imageUrl)
+
+    var strGenres = ""
+    for (genre in movieEntity.genres) {
+      if (strGenres.isEmpty()) {
+        strGenres = genre.name
+      } else {
+        strGenres += ", ${genre.name}"
+      }
+    }
+
+    _genres.postValue(strGenres)
   }
 
   private fun onErrorGetMovieDetails(message: String) {
