@@ -62,6 +62,7 @@ dependencies {
   testImplementation(Deps.mockitoKotlin)
   testImplementation(Deps.coroutinesTest)
   testImplementation(Deps.mockWebServer)
+  testImplementation(Deps.robolectric)
 
   androidTestImplementation(Deps.jUnitExt)
   androidTestImplementation(Deps.espresso)

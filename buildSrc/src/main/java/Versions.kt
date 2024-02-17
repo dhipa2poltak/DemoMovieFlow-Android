@@ -36,4 +36,5 @@ object Versions {
   const val lifecycleViewModel = "2.6.1"
 
   const val mockWebServer = "4.10.0"
+  const val robolectric = "4.11.1"
 }

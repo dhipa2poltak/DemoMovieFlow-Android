@@ -35,4 +35,5 @@ object Deps {
   const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewModel}"
 
   const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
+  const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
 }
