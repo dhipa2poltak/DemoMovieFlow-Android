@@ -1,24 +1,35 @@
 package com.dpfht.android.demomovieflow.feature_splash
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import com.dpfht.android.demomovieflow.feature_splash.databinding.FragmentSplashBinding
-import com.dpfht.android.demomovieflow.framework.Constants
 import com.dpfht.android.demomovieflow.framework.commons.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
 
+  private val viewModel by viewModels<SplashViewModel>()
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    Handler(Looper.getMainLooper()).postDelayed({
-      navigationService.navigateToMovieHome()
-    }, Constants.DELAY_SPLASH)
+    observeViewModel()
+    viewModel.start()
+  }
+
+  private fun observeViewModel() {
+    viewModel.hasFinishedDelaying.observe(viewLifecycleOwner) { hasFinished ->
+      if (hasFinished) {
+        navigateToNextScreen()
+      }
+    }
+  }
+
+  private fun navigateToNextScreen() {
+    navigationService.navigateToMovieHome()
   }
 
   override fun onStart() {
