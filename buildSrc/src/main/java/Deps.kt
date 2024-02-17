@@ -7,6 +7,8 @@ object Deps {
   const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesTest}"
   const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
   const val mockitoInline = "org.mockito:mockito-inline:${Versions.mockitoInline}"
+  const val coreTesting = "androidx.arch.core:core-testing:${Versions.coreTesting}"
+  const val coreKtxTesting = "androidx.test:core-ktx:${Versions.coreKtxTesting}"
 
   const val jUnitExt = "androidx.test.ext:junit:${Versions.jUnitExt}"
   const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"

@@ -8,6 +8,8 @@ object Versions {
   const val coroutinesTest = "1.6.2"
   const val mockitoKotlin = "5.2.1"
   const val mockitoInline = "5.2.0"
+  const val coreTesting = "2.2.0"
+  const val coreKtxTesting = "1.5.0"
 
   const val jUnitExt = "1.1.5"
   const val espresso = "3.5.1"

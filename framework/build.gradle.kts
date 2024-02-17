@@ -63,6 +63,8 @@ dependencies {
   testImplementation(Deps.coroutinesTest)
   testImplementation(Deps.mockWebServer)
   testImplementation(Deps.robolectric)
+  testImplementation(Deps.coreTesting)
+  testImplementation(Deps.coreKtxTesting)
 
   androidTestImplementation(Deps.jUnitExt)
   androidTestImplementation(Deps.espresso)
@@ -80,8 +82,6 @@ dependencies {
   implementation(Deps.room)
 
   implementation(Deps.coroutinesAndroid)
-
   implementation(Deps.pagingRuntime)
-
   implementation(Deps.picasso)
 }

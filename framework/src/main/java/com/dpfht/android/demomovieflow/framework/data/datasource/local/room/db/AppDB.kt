@@ -15,10 +15,16 @@ abstract class AppDB: RoomDatabase() {
   companion object {
     private var INSTANCE: AppDB? = null
 
-    fun getDatabase(context: Context): AppDB {
+    fun getDatabase(context: Context, isInMemory: Boolean = false): AppDB {
       val tempInstance = INSTANCE
       if (tempInstance != null) {
         return tempInstance
+      }
+
+      if (isInMemory) {
+        return Room
+          .inMemoryDatabaseBuilder(context, AppDB::class.java)
+          .build()
       }
 
       synchronized(this) {
