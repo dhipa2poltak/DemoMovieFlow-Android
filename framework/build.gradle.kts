@@ -60,6 +60,7 @@ dependencies {
   implementation(Deps.material)
   testImplementation(Deps.jUnit)
   testImplementation(Deps.mockitoKotlin)
+  testImplementation(Deps.mockitoInline)
   testImplementation(Deps.coroutinesTest)
   testImplementation(Deps.mockWebServer)
   testImplementation(Deps.robolectric)
