@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("OPT_IN_USAGE_FUTURE_ERROR")
 @HiltViewModel
 class SearchMovieViewModel @Inject constructor(
   private val searchMovieDataSource: SearchMovieDataSource

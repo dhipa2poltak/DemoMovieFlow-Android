@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.paging.PagingSource.LoadParams
 import com.dpfht.android.demomovieflow.feature_search_movie.paging.SearchMovieDataSource
-import com.dpfht.android.demomovieflow.framework.commons.adapter.MovieAdapter
 import com.dpfht.demomovieflow.domain.entity.MovieDomain
 import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.demomovieflow.domain.entity.Result
@@ -40,9 +39,10 @@ class SearchMovieViewModelTest {
 
   private lateinit var searchMovieDataSource: SearchMovieDataSource
 
-  private lateinit var adapter: MovieAdapter
   private lateinit var searchMovieUseCase: SearchMovieUseCase
   private lateinit var errorMessageObserver: Observer<String>
+  private lateinit var noDataObserver: Observer<Boolean>
+  private lateinit var setAdapterObserver: Observer<Boolean>
 
   private val page = 1
   private val key = "title"
@@ -51,9 +51,10 @@ class SearchMovieViewModelTest {
   fun setup() {
     Dispatchers.setMain(testDispatcher)
 
-    adapter = mock()
     searchMovieUseCase = mock()
     errorMessageObserver = mock()
+    noDataObserver = mock()
+    setAdapterObserver = mock()
 
     searchMovieDataSource = SearchMovieDataSource(searchMovieUseCase)
 
@@ -75,10 +76,33 @@ class SearchMovieViewModelTest {
 
     whenever(searchMovieUseCase.invoke(key, page)).thenReturn(retFlow)
 
+    viewModel.setAdapterData.observeForever(setAdapterObserver)
+
     viewModel.onSearchMovie(key)
     searchMovieDataSource.load(LoadParams.Refresh(1, 20, false, 20))
 
+    verify(setAdapterObserver).onChanged(eq(true))
     assertTrue(viewModel.adapter.itemCount == movies.size)
+  }
+
+  @Test
+  fun `search movie successfully but no data available`() = runTest {
+    val movies = listOf<MovieEntity>()
+    val movieDomain = MovieDomain(page, movies)
+
+    val retFlow = flow {
+      emit(Success(movieDomain))
+    }
+
+    whenever(searchMovieUseCase.invoke(key, page)).thenReturn(retFlow)
+
+    viewModel.isNoData.observeForever(noDataObserver)
+    viewModel.setAdapterData.observeForever(setAdapterObserver)
+
+    viewModel.onSearchMovie(key)
+
+    verify(setAdapterObserver).onChanged(eq(true))
+    verify(noDataObserver).onChanged(eq(true))
   }
 
   @Test
@@ -94,9 +118,11 @@ class SearchMovieViewModelTest {
     whenever(searchMovieUseCase.invoke(key, page)).thenReturn(retFlow)
 
     viewModel.modalMessage.observeForever(errorMessageObserver)
+    viewModel.setAdapterData.observeForever(setAdapterObserver)
 
     viewModel.onSearchMovie(key)
 
+    verify(setAdapterObserver).onChanged(eq(true))
     verify(errorMessageObserver).onChanged(eq(msg))
   }
 }

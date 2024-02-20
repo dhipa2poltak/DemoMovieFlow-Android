@@ -23,6 +23,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.any
 import org.mockito.kotlin.eq
+import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
@@ -47,6 +48,9 @@ class PopularMoviesViewModelTest {
 
   @Mock
   private lateinit var errorMessageObserver: Observer<String>
+
+  @Mock
+  private lateinit var noDataObserver: Observer<Boolean>
 
   @Before
   fun setup() {
@@ -79,6 +83,32 @@ class PopularMoviesViewModelTest {
     popularMoviesDataSource.load(LoadParams.Refresh(1, 20, false, 20))
 
     verify(adapter).submitData(any())
+
+    whenever(adapter.itemCount).thenReturn(movies.size)
+    viewModel.start()
+    verify(adapter, times(2)).itemCount
+  }
+
+  @Test
+  fun `fetch popular movies successfully but no data available`() = runTest {
+    val page = 1
+
+    val movies = listOf<MovieEntity>()
+    val movieDomain = MovieDomain(page, movies)
+
+    val retFlow = flow {
+      emit(Result.Success(movieDomain))
+    }
+
+    whenever(getPopularMoviesUseCase.invoke(page)).thenReturn(retFlow)
+    whenever(adapter.itemCount).thenReturn(0)
+
+    viewModel.isNoData.observeForever(noDataObserver)
+
+    viewModel.start()
+    popularMoviesDataSource.load(LoadParams.Refresh(1, 20, false, 20))
+
+    verify(noDataObserver).onChanged(eq(true))
   }
 
   @Test

@@ -4,7 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.android.demomovieflow.feature_favorite_movies.adapter.FavoriteMoviesAdapter
 import com.dpfht.android.demomovieflow.framework.commons.model.FavoriteMovieVWModel
+import com.dpfht.demomovieflow.domain.entity.GenreEntity
+import com.dpfht.demomovieflow.domain.entity.MovieEntity
 import com.dpfht.demomovieflow.domain.entity.Result
+import com.dpfht.demomovieflow.domain.entity.VoidResult
 import com.dpfht.demomovieflow.domain.entity.db_entity.FavoriteMovieDBEntity
 import com.dpfht.demomovieflow.domain.usecase.DeleteFavoriteMovieUseCase
 import com.dpfht.demomovieflow.domain.usecase.GetAllFavoriteMoviesUseCase
@@ -53,6 +56,25 @@ class FavoriteMoviesViewModelTest {
 
   private val cacheModels = arrayListOf<FavoriteMovieVWModel>()
 
+  private val movieId = 101
+  private val title = "title1"
+  private val overview = "overview1"
+  private val posterPath = "poster_path1"
+  private val genreName1 = "Action"
+  private val genreName2 = "Drama"
+  private val genres = listOf(GenreEntity(10, genreName1), GenreEntity(11, genreName2))
+
+  private val movieEntity = MovieEntity(
+    id = movieId,
+    title = title,
+    overview = overview,
+    imageUrl = posterPath,
+    genres = genres
+  )
+
+  private val favMovie = FavoriteMovieDBEntity(1, movieId)
+  private val favMovieModel = FavoriteMovieVWModel(favMovie, movieEntity)
+
   @Before
   fun setup() {
     Dispatchers.setMain(testDispatcher)
@@ -100,5 +122,52 @@ class FavoriteMoviesViewModelTest {
 
     verify(errorMessageObserver).onChanged(eq(msg))
     verify(showLoadingObserver).onChanged(eq(false))
+  }
+
+  @Test
+  fun `delete favorite movie from details screen successfully`() = runTest {
+    viewModel.isFromDetails = true
+    viewModel.isRemovingMovie = true
+    viewModel.movieIdToRemove = 101
+
+    cacheModels.add(favMovieModel)
+
+    val retFlow = flow {
+      emit(VoidResult.Success)
+    }
+
+    whenever(deleteFavoriteMovieUseCase(movieEntity)).thenReturn(retFlow)
+
+    viewModel.isShowDialogLoading.observeForever(showLoadingObserver)
+
+    viewModel.start()
+
+    verify(showLoadingObserver).onChanged(eq(false))
+    assertTrue(cacheModels.isEmpty())
+  }
+
+  @Test
+  fun `failed delete favorite movie from details screen`() = runTest {
+    val msg = "error delete favorite movie"
+
+    viewModel.isFromDetails = true
+    viewModel.isRemovingMovie = true
+    viewModel.movieIdToRemove = 101
+
+    cacheModels.add(favMovieModel)
+
+    val retFlow = flow {
+      emit(VoidResult.Error(msg))
+    }
+
+    whenever(deleteFavoriteMovieUseCase(movieEntity)).thenReturn(retFlow)
+
+    viewModel.isShowDialogLoading.observeForever(showLoadingObserver)
+    viewModel.modalMessage.observeForever(errorMessageObserver)
+
+    viewModel.start()
+
+    verify(showLoadingObserver).onChanged(eq(false))
+    verify(errorMessageObserver).onChanged(eq(msg))
   }
 }
