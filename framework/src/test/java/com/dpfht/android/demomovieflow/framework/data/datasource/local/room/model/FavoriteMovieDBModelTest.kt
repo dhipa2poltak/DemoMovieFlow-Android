@@ -10,7 +10,6 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 @OptIn(ExperimentalCoroutinesApi::class)
-
 class FavoriteMovieDBModelTest {
 
   @Test
