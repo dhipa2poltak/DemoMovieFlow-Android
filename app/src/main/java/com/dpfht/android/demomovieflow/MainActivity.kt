@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dpfht.android.demomovieflow.databinding.ActivityMainBinding
 import com.dpfht.android.demomovieflow.framework.R as frameworkR
+import com.dpfht.android.demomovieflow.navigation.R as navigationR
 import com.dpfht.android.demomovieflow.view.about.AboutDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
   }
 
   override fun onSupportNavigateUp(): Boolean {
-    if (navController.currentDestination?.id == frameworkR.id.movieDetailsFragment) {
+    if (navController.currentDestination?.id == navigationR.id.movieDetailsFragment) {
       onBackPressed()
       return true
     }
