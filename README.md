@@ -5,9 +5,6 @@
 | ------------------------------------------------ | ----------------------------------------------- | --------------------------------------------- |
 | <img src="docs/screenshots/favorite_movies.jpg"> | <img src="docs/screenshots/movie_details.jpg">  | <img src="docs/screenshots/burger_menu.jpg">  |
 
-**APK file:**
-**[Demo Movie Flow v1.3.apk](https://drive.google.com/file/d/1R-kwJdlOa_MeuqaIKkbiCnJYs7BeQF4T/view?usp=sharing)**
-
 **Technology Stack:**
 - Kotlin Programming Language
 - Clean Architecture
@@ -48,7 +45,7 @@ once you have created it, open the project with Android Studio, build the projec
 1. Open Terminal then move to "root_project" directory.
 2. type "./gradlew codeCoverModules allDebugCodeCoverage" (enter), wait until finish executing.
 
-The report file will be located in "root_project/build/reports/jacoco/allDebugCoverage/html/index.html", open it using browser.
+The report file will be located in "root_project/build/reports/jacoco/allDebugCoverage/html/index.html", open it with browser.
 
 **Caution:**
 **Later I will add more unit tests to increase the code coverage value.**
