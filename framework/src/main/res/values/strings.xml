@@ -7,4 +7,5 @@
   <string name="framework_text_fail_get_favorite_movie">failed to get favorite movie</string>
   <string name="framework_text_fail_add_favorite_movie">failed to add favorite movie</string>
   <string name="framework_text_fail_delete_favorite_movie">failed to delete favorite movie</string>
+  <string name="text_no_data">no data available</string>
 </resources>
