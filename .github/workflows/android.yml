@@ -55,6 +55,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
+      - name: Access Secrets
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          KEYSTORE_BASE_64: ${{ secrets.KEYSTORE_BASE_64 }}
+          RELEASE_KEYSTORE_ALIAS: ${{ secrets.RELEASE_KEYSTORE_ALIAS }}
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          echo accessToken=$ACCESS_TOKEN > ./key.properties
+          echo storePassword=$RELEASE_KEYSTORE_PASSWORD >> ./key.properties
+          echo keyPassword=$RELEASE_KEY_PASSWORD >> ./key.properties
+          echo keyAlias=$RELEASE_KEYSTORE_ALIAS >> ./key.properties
+          echo storeFile=../app.keystore >> ./key.properties
+          echo $KEYSTORE_BASE_64 > ./keystore-b64.txt
+          base64 -d keystore-b64.txt > ./app.keystore
       - name: Unit tests
         run: ./gradlew codeCoverModules allDebugCodeCoverage --stacktrace
 
